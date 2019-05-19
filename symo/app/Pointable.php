@@ -18,6 +18,6 @@ class Pointable extends Model
 
     public function sets()
     {
-        return $this->morphToMany(Set::class,'pointable');
-
+        return $this->morphToMany(Set::class, 'pointable');
+    }
 }
