@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class set extends Model
+class Set extends Model
 {
     public function seasons()
     {

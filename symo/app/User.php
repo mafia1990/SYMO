@@ -5,7 +5,13 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Post
+ *
+ * @mixin \Eloquent
+ */
 class User extends Authenticatable
 {
     use Notifiable;
