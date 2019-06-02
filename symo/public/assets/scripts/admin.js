@@ -40,7 +40,7 @@ function chat_user(id){
             if(data['status']==200){
 
                 for(i=0;data[i]!=null;i++){
-                    if(data[i].type=="admin"){
+                    if(data[i].type=="Admin"){
 
                         $("#chat-log-"+id).append(   "  \
                          <li class=\"left clearfix\">\

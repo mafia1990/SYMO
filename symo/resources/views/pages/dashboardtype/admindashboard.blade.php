@@ -253,7 +253,7 @@
             <div class="panel-body">
                 <ul class="chat" id="chat-log-{!! $chats->srcid !!}">
                     @foreach($chats->messages as $msg)
-                        @if( $msg->type=='admin')
+                        @if( $msg->type=='Admin')
 
                             <li class="left clearfix">
                                     <span class="chat-img pull-left">

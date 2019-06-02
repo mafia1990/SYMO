@@ -1244,7 +1244,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
-    float: left;
+    float: right;
   }
   .col-lg-12 {
     width: 100%;
@@ -1697,6 +1697,7 @@ output {
   line-height: 1.42857143;
   color: #555;
   background-color: #fff;
+  text-align: right;
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -1739,6 +1740,7 @@ input[type="date"] {
 }
 .form-group {
   margin-bottom: 15px;
+  text-align: right;
 }
 .radio,
 .checkbox {
@@ -4429,6 +4431,7 @@ a.thumbnail.active {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  text-align: right;
 }
 .alert h4 {
   margin-top: 0;
@@ -4957,6 +4960,7 @@ a.list-group-item-danger.active:focus {
   color: #333;
   background-color: #f5f5f5;
   border-color: #ddd;
+  text-align: right;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #ddd;

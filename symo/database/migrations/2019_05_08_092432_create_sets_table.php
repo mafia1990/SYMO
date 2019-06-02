@@ -15,11 +15,11 @@ class CreateSetsTable extends Migration
     {
         Schema::create('sets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('designerid');
+            $table->unsignedBigInteger('user_id');
             $table->tinyInteger('status');
             $table->tinyInteger('more_than');
             $table->tinyInteger('less_than');
-            $table->foreign('designerid')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@ class CreateClothsTable extends Migration
         Schema::create('cloths', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->text('comment')->nullable();
             $table->tinyInteger('status');
             $table->timestamps();
         });

@@ -24,7 +24,7 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      * user type
-     * 1 admin
+     * 1 Admin
      * 2 operator
      * 3 designer
      * 4 customer

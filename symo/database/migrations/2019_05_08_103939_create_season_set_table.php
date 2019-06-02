@@ -14,7 +14,13 @@ class CreateSeasonSetTable extends Migration
     public function up()
     {
         Schema::table('season_set', function (Blueprint $table) {
-            //
+            $table->bigIncrements('id');
+            $table->unsignedSmallInteger('season_id');
+            $table->unsignedBigInteger('set_id');
+            $table->foreign('season_id')->references('id')->on('season')->onDelete('cascade');
+            $table->foreign('set_id')->references('id')->on('sets')->onDelete('cascade');
+
+            $table->timestamps();
         });
     }
 

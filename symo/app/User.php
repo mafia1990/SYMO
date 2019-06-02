@@ -22,7 +22,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','gender','address','status','phone','mobile','avatar','id'
     ];
 
     /**
@@ -46,5 +46,15 @@ class User extends Authenticatable
     public function  roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+    public function  sets()
+    {
+        return $this->hasMany(Set::class);
+    }
+    /*adding image path */
+    function getAvatarAttribute($value){
+        if($value!="")
+            return '/images/users/'.$value;
+        else return $value;
     }
 }

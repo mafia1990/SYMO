@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Style extends Model
 {
-    public function styles()
+    public function sets()
     {
-        return $this->belongsToMany(Style::class);
+        return $this->belongsToMany(Set::class);
     }
 }

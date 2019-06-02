@@ -6,6 +6,61 @@ Author: http://binarytheme.com
  Enjoy Our Codes For Free always.
 ======================================*/
 
+
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: bold;
+    src: url('/fonts/IRANSans-Bold-web.eot');
+    src: url('/fonts/IRANSans-Bold-web.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+    url('/fonts/IRANSans-Bold-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
+    url('/fonts/IRANSans-Bold-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans-Bold-web.ttf') format('truetype');
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/IRANSans-Medium-web.eot');
+    src: url('/fonts/IRANSans-Medium-web.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+    url('/fonts/IRANSans-Medium-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
+    url('/fonts/IRANSans-Medium-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans-Medium-web.ttf') format('truetype');
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url('/fonts/IRANSans-Light-web.eot');
+    src: url('/fonts/IRANSans-Light-web.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+    url('/fonts/IRANSans-Light-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
+    url('/fonts/IRANSans-Light-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans-Light-web.ttf') format('truetype');
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 200;
+    src: url('/fonts/IRANSans-UltraLight-web.eot');
+    src: url('/fonts/IRANSans-UltraLight-web.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+    url('/fonts/IRANSans-UltraLight-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
+    url('/fonts/IRANSans-UltraLight-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans-UltraLight-web.ttf') format('truetype');
+}
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('/fonts/IRANSans-web.eot');
+    src: url('/fonts/IRANSans-web.eot?#iefix') format('embedded-opentype'),  /* IE6-8 */
+    url('/fonts/IRANSans-web.woff2') format('woff2'),  /* Chrome36+, Opera24+*/
+    url('/fonts/IRANSans-web.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    url('/fonts/IRANSans-web.ttf') format('truetype');
+}
+body{
+    font-family:"IRANSans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
 /* user image section */
 .user-section {
     margin-top:20px;
@@ -20,8 +75,8 @@ width: 65px;
 border-radius: 3px;
 overflow: hidden;
 display: inline-block;
-float: left;
-margin-right: 15px;
+float: right;
+margin-left:  15px;
 margin-top: 20px;
 }
     .user-section-inner img {
@@ -130,7 +185,7 @@ border-color: #27A6BE;
 {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 250px;
+        margin: 0 250px 0 0;
         padding: 0 30px;
         min-height: 1000px;
        

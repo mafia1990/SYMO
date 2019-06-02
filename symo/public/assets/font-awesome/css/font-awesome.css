@@ -41,6 +41,7 @@
 .fa-fw {
   width: 1.2857142857142858em;
   text-align: center;
+  float: right;
 }
 .fa-ul {
   padding-left: 0;

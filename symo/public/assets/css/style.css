@@ -45,8 +45,10 @@ limitations under the License.*/
 
     
 
+
 .navbar-static-side ul li {
     border-bottom:1px solid #84B899 !important;
+
 }
 
 /* Navigation */
@@ -116,7 +118,7 @@ limitations under the License.*/
 }
 
 .arrow {
-    float: right;
+    float: left;
 }
 
 .fa.arrow:before {
@@ -145,6 +147,8 @@ limitations under the License.*/
         z-index: 1;
         position: absolute;
         width: 250px;
+        text-align: right;
+        right: 0;
     }
 
     .navbar-top-links .dropdown-messages,

@@ -15,11 +15,10 @@ class CreateClothCategoryPropertyDataTable extends Migration
     {
         Schema::create('cloth_category_property_data', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->unsignedInteger('catpdid');
-            $table->unsignedBigInteger('clothid');
-            $table->foreign('catpdid')->references('id')->on('category_property_data')->onDelete('cascade');
-            $table->foreign('clothid')->references('id')->on('cloths')->onDelete('cascade');
+            $table->unsignedInteger('category_property_data_id');
+            $table->unsignedBigInteger('cloth_id');
+            $table->foreign('category_property_data_id')->references('id')->on('category_property_data')->onDelete('cascade');
+            $table->foreign('cloth_id')->references('id')->on('cloths')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -9,12 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Symo | Admin Dashboad </title>
     <!-- Core CSS - Include with every page -->
-    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-    <link href="assets/css/style.css" rel="stylesheet" />
-    <link href="assets/css/main-style.css" rel="stylesheet" />
-    <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <link href="/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="/assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/main-style.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="/assets/img/favicon.ico">
 
     @yield("CSS")
 </head>
@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="assets/img/logo.png" alt="" />
+                    <img src="/assets/img/logo.png" alt="" />
                 </a>
             </div>
             <!-- end navbar-header -->
@@ -50,7 +50,7 @@
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="userprofile"><i class="fa fa-user fa-fw"></i>User Profile</a>
                         </li>
-                        <li><a href="settings"><i class="fa fa-gear fa-fw"></i>Settings</a>
+                        <li><a href="/admin/settings"><i class="fa fa-gear fa-fw"></i>Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -94,15 +94,15 @@
                             <div class="user-section-inner">
 
                                 @if(isset($useravatar))
-                                <img src="assets/users/{!! $useravatar  !!}" alt="">
+                                <img src="/assets/users/{!! $useravatar  !!}" alt="">
                                 @else
-                                    <img src="assets/img/user.jpg" alt="">
+                                    <img src="/assets/img/user.jpg" alt="">
                                 @endif
                             </div>
                             <div class="user-info">
                                 <div>Admin </div>
                                 <div class="user-text-online">
-                                    <span class="user-circle-online btn btn-success btn-circle "></span>&nbsp;Online
+                                    <span class="user-circle-online btn btn-success btn-circle invisible"></span>
                                 </div>
                             </div>
                         </div>
@@ -145,11 +145,11 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="assets/plugins/pace/pace.js"></script>
-    <script src="assets/scripts/symo.js"></script>
+    <script src="/assets/plugins/jquery-1.10.2.js"></script>
+    <script src="/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="/assets/plugins/pace/pace.js"></script>
+    <script src="/assets/scripts/symo.js"></script>
     @yield("JS")
 </body>
 

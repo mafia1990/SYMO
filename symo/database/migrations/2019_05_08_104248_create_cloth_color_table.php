@@ -14,7 +14,9 @@ class CreateClothColorTable extends Migration
     public function up()
     {
         Schema::table('cloth_color', function (Blueprint $table) {
-            //
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->timestamps();
         });
     }
 

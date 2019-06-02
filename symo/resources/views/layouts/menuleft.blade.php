@@ -1,39 +1,42 @@
 
 <li>
-    <a href="/"><i class="fa fa-dashboard fa-fw"></i>Dashboard</a>
+    <a href="/"><i class="fa fa-dashboard fa-fw"></i>داشبورد</a>
 </li>
 @if(session()->get('permission')==1)
 <li>
-    <a href="chart"><i class="fa fa-bar-chart-o fa-fw"></i>Charts</a>
+    <a href="chart"><i class="fa fa-bar-chart-o fa-fw"></i>جداول آنالیز</a>
 </li>
 @endif
 <li>
-    <a {!! Request::is('operators')?"class='active'":"" !!} href=""><i class="fa fa-table fa-fw"></i>Manage<span class="fa arrow"></span></a>
+    <a {!! Request::is('operators')?"class='active'":"" !!} href=""><i class="fa fa-table fa-fw"></i>مدیریت<span class="fa arrow"></span></a>
 
     <ul class="nav nav-second-level">
-        @if(session()->get('permission')==1 || session()->get('permission')=="operator")
+        @if(Auth::user()->type==1 || Auth::user()->type==2)
         <li>
-            <a href="users">Manage customer</a>
+            <a href="/admin/customers">مدیریت مشتری</a>
         </li>
 
         <li>
-            <a href="salers">Manage salers</a>
+            <a href="salers">مدیریت فروشنده</a>
         </li>
         <li>
-            <a href="designers">Manage designers</a>
+            <a href="designers">مدیریت طراح</a>
         </li>
         <li>
-            <a href="clothes">Manage clothes</a>
+            <a href="/admin/clothes">مدیریت لباس ها</a>
+        </li>
+        <li>
+            <a href="/admin/sets">مدیریت ست ها</a>
         </li>
         @endif
         @if(session()->get('permission')==1)
         <li>
-            <a  href="operators">Manage operators</a>
+            <a  href="operators">مدیریت اپراتور</a>
         </li>
         @endif
         @if(session()->get('permission')=="designer")
         <li>
-            <a href=""><i class="fa fa-table fa-fw"></i>Design<span class="fa arrow"></span></a>
+            <a href=""><i class="fa fa-table fa-fw"></i>طراحی<span class="fa arrow"></span></a>
 
             <ul class="nav nav-second-level">
                 <li>
