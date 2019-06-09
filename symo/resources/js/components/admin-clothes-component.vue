@@ -15,8 +15,6 @@
 
                         <li><a href="javascript:void();" @click="delete_clothes">Delete Clothes</a></li>
 
-
-
                     </ul>
                 </div>
             </div>
@@ -24,7 +22,7 @@
 
         <div class="panel-body">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover direction" id="dataTables-example">
                     <thead>
                     <tr>
                         <th>Cloth ID</th>
@@ -44,7 +42,7 @@
 
                         </td>
                         <td>{{cloth['title']}} </td>
-                    <td>  {{cloth.category.name }}</td>
+                    <td>  {{cloth.category['name'] }}</td>
                         <td class="text-center" >
                             <img  class=" img-circle" width="50px" height="50px" v-if="cloth.images.length>0" :src="cloth.images[0].path" />
                             <img  class=" img-circle" width="50px" height="50px" v-else  />

@@ -4,39 +4,75 @@
 <div class="row">
     <!-- Welcome -->
     <div class="col-lg-12">
-        <div class="alert alert-info">
-            <i class="fa fa-folder-open"></i><b>&nbsp;Hello ! </b>Welcome Back <b>{!! $fields["name"]; !!} </b>
+        <div class="alert alert-info text-right">
+           <b>&nbsp;سلام ! </b>خوش آمدید <b>{!! $fields["name"]; !!} </b> <i class="fa fa-folder-open"></i>
 
         </div>
     </div>
     <!--end  Welcome -->
 </div>
 <div class="row">
-    <!--quick info section -->
-    <div class="col-lg-3">
-        <div class="alert alert-danger text-center">
-            <i class="fa fa-archive fa-3x"></i>&nbsp;<b>{!! $fields["setsCount"] !!} </b>sets not accept!
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-aqua">
+            <div class="inner">
+                <h3>{{$fields['setsCount']}}</h3>
 
+                <p>ست های مورد بررسی</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-copy-outline"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i> اطلاعات بیشتر </a>
         </div>
     </div>
-    <div class="col-lg-3">
-        <div class="alert alert-success text-center">
-            <i class="fa  fa-users fa-3x"></i>&nbsp;<b>{!! $fields["selerCount"]  !!} </b>salers not verification
-        </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="alert alert-info text-center">
-            <i class="fa fa-briefcase fa-3x"></i>&nbsp;<b>{!! $fields["clothUnverifyCount"] !!}</b> clothes not verification
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-green">
+            <div class="inner">
+                <h3>{{$fields['clothUnverifyCount']}}</h3>
 
+                <p>لباس های مورد بررسی</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-android-done-all"></i>
+            </div>
+            <a href="{{route('clothes.index')}}" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i> اطلاعات بیشتر </a>
         </div>
     </div>
-    <div class="col-lg-3">
-        <div class="alert alert-warning text-center">
-            <i class="fa  fa-lock fa-3x"></i>&nbsp;<b>{!!  $fields["userUnverifyCustomerCount"]    !!} </b>users blocked
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-yellow">
+            <div class="inner">
+                <h3>{{$fields['userCount']}}</h3>
+
+                <p>تمام کاربران</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-ios-people-outline"></i>
+            </div>
+            <a href="" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i> اطلاعات بیشتر </a>
         </div>
     </div>
-    <!--end quick info section -->
+    <!-- ./col -->
+    <div class="col-lg-3 col-xs-6">
+        <!-- small box -->
+        <div class="small-box bg-red">
+            <div class="inner">
+                <h3>{{$fields['sellersCount']}}</h3>
+
+                <p>فروشندگان بررسی نشده</p>
+            </div>
+            <div class="icon">
+                <i class="ion  ion-android-contacts"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i> اطلاعات بیشتر </a>          </div>
+    </div>
+    <!-- ./col -->
 </div>
+
 
 <div class="row">
     <div class="col-lg-8">
@@ -44,45 +80,51 @@
 
         <!-- table sets -->
         <div class="panel panel-primary">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i>Newest Sets
+            <div class="panel-heading direction">
+                <i class="fa fa-bar-chart-o fa-fw"></i> جدید ترین ست ها
 
             </div>
-            @if($fields['setsCount']>0)
+
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
+                            <table class="table table-bordered table-hover table-striped direction">
                                 <thead>
                                 <tr>
-                                    <th>#Set Id</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Status</th>
+                                    <th>کد</th>
+                                    <th>تاریخ</th>
+                                    <th>زمان</th>
+                                    <th>توضیحات</th>
+                                    <th>وضعیت</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($sets as $set)
+                                @foreach($fields['sets'] as $set)
                                     <tr>
                                         <td>{!! $set->id !!} </td>
                                         <td>{!!  explode(" " ,$set->updated_at)[0] !!}</td>
                                         <td>{!! explode(" ",$set->updated_at)[1] !!}</td>
+                                        <td>{!! Str::limit( $set->comment,20,"...") !!}</td>
                                         <td class="text-center">
-                                            <button onclick="delete_set({!! $set->setid !!})" type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i>
+                                            <button onclick="delete_set({!! $set->id !!})" type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i>
 
                                             </button>
-                                            <a href="editset?id={!! $set->setid !!}"><button  type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i>
+                                            <a href="/admin/sets/{!! $set->id !!}/edit"><button  type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i>
                                                 </button></a>
                                             <button   type="button" class="btn {!! ($set->status=='1')?"btn-success":"btn-default"; !!} btn-circle"><i class="fa fa-check"></i>
                                             </button>
                                         </td>
                                     </tr>
                                  @endforeach
-
-
+                                @if(count($fields['sets'])==0)
+                                    <tr  class="text-center"><td colspan="5" > {!! "متاسفانه هیچ ست و مدلی موجود نمی باشد"!!}</td></tr>
+                                @endif
                                 </tbody>
+
                             </table>
+
+
                         </div>
 
                     </div>
@@ -92,227 +134,386 @@
 
                 <!-- /.row -->
             </div>
-            @endif
+
             <!-- /.panel-body -->
         </div>
         <!--End  table  -->
-        <!--table clothes -->
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i>Newest Clothes
 
-            </div>
-            @if(count($fields['clothes'])>0)
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover  table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>#Cloth Id</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($clothes as $cloth)
-                                        <tr>
-                                            <td>{!! $cloth->id !!} </td>
-                                            <td>{!!  explode(" " ,$cloth->updated_at)[0] !!}</td>
-                                            <td>{!! explode(" ",$cloth->updated_at)[1] !!}</td>
-                                            <td class="text-center">
-                                                <button onclick="delete_cloth({!! $cloth->id !!})" type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i>
+        <div class="col-md-6">
+            <!-- USERS LIST -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">جدیدترین اعضا</h3>
 
-                                                </button>
-                                                <a href="editcloth?id={!! $cloth->id !!}"><button  type="button" class="btn btn-primary btn-circle"><i class="fa fa-list"></i>
-                                                    </button></a>
-                                                <button   type="button" class="btn {!! ($cloth->status=='1')?"btn-success":"btn-default"; !!} btn-circle"><i class="fa fa-check"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                    <div class="box-tools pull-right">
 
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                        </button>
                     </div>
-
-
-                    <!-- /.row -->
                 </div>
-        @endif
-        <!-- /.panel-body -->
-        </div>
-        <!--End  table  -->
-        @if(count($fields['notifies'] )>0)
-        <div class="col-lg-12 ">
-            <!-- Notifications-->
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i>Notifications Panel
-                </div>
-
-                <div class="panel-body">
-                    <div class="list-group">
-
-                        @foreach($notifies as $notify)
-                        <a href="#" class="list-group-item">
-                            <i class="fa fa-comment fa-fw"></i>{!! $notify->msg; !!}
-                            <span class="pull-right text-muted small"><em>{!! $notify->date; !!}</em>
-                                    </span>
-                        </a>
-
-                         @endforeach
-
-                    </div>
-                    <!-- /.list-group -->
-                    <a href="#" class="btn btn-default btn-block">View All Alerts</a>
-                </div>
-
-            </div>
-            <!--End Notifications-->
-        </div>
-        @endif
-    </div>
-
-    <div class="col-lg-4">
-        <div class="panel panel-primary text-center no-boder">
-            <div class="panel-body yellow">
-                <i class="fa fa-bar-chart-o fa-3x"></i>
-                <h3>{!! $fields['visitors'] !!} </h3>
-            </div>
-            <div class="panel-footer">
-                            <span class="panel-eyecandy-title">Daily User Visits
-                            </span>
-            </div>
-        </div>
-        <div class="panel panel-primary text-center no-boder">
-            <div class="panel-body blue">
-                <i class="fa fa-pencil-square-o fa-3x"></i>
-                <h3>{!! $fields['orders'] !!}  </h3>
-            </div>
-            <div class="panel-footer">
-                            <span class="panel-eyecandy-title">Pending Orders Found
-                            </span>
-            </div>
-        </div>
-        <div class="panel panel-primary text-center no-boder">
-            <div class="panel-body green">
-                <i class="fa fa fa-floppy-o fa-3x"></i>
-                <h3>{!! $fields['space'] !!} </h3>
-            </div>
-            <div class="panel-footer">
-                            <span class="panel-eyecandy-title">New Data Uploaded
-                            </span>
-            </div>
-        </div>
-        <div class="panel panel-primary text-center no-boder">
-            <div class="panel-body red">
-                <i class="fa fa-thumbs-up fa-3x"></i>
-                <h3>{!!  $fields['userCustomerCount']  !!}  </h3>
-            </div>
-            <div class="panel-footer">
-                            <span class="panel-eyecandy-title">New User Registered
-                            </span>
-            </div>
-        </div>
-    </div>
-
-</div>
-@if(count( $fields['sessionchats'])>0)
-<div class="row">
-
-    @foreach($fields['sessionchats'] as $chats)
-    <div class="col-lg-4 chats">
-        <!-- Chat Panel Example-->
-        <div class="chat-panel panel panel-primary">
-            <div class="panel-heading">
-                <i class="fa fa-comments fa-fw"></i>
-                Chat
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-chevron-down"></i>
-                    </button>
-                    <ul class="dropdown-menu slidedown">
-                        <li>
-                            <a href="javascript:void();" onclick="chat_user({!! $chats->srcid !!})">
-                                <i class="fa fa-refresh fa-fw"></i>Refresh
-                            </a>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <ul class="users-list clearfix">
+                        @foreach($fields['CustomerCount'] as $customer)
+                        <li style="padding:4px;">
+                            <img src="{{ ($customer->avatar==null)?"/images/users/user.jpg":$customer->avatar}}" alt="User Image">
+                            <a class="users-list-name" href="#">{{$customer->name}}</a>
+                            <span class="users-list-date">{!!   App\Helpers::time_elapsed_string($customer->created_at)  !!} </span>
                         </li>
 
+                        @endforeach
                     </ul>
+                    <!-- /.users-list -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                    <a href="{{route("customers.index")}}" class="uppercase">مشاهده تمام مشتریان</a>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!--/.box -->
+        </div>
+        <div class="col-md-6">
+            <!-- DIRECT CHAT -->
+            <div class="box box-warning direct-chat direct-chat-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">گفتگو مستقیم</h3>
+
+                    <div class="box-tools pull-right">
+                        <span data-toggle="tooltip" title="" class="badge bg-yellow" data-original-title="3 New Messages">3</span>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="" data-widget="chat-pane-toggle" data-original-title="Contacts">
+                            <i class="fa fa-comments"></i></button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <!-- Conversations are loaded here -->
+                    <div class="direct-chat-messages">
+                        <!-- Message. Default to the left -->
+                        <div class="direct-chat-msg">
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                                <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                            </div>
+                            <!-- /.direct-chat-info -->
+                            <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                اوضاع خیلی خوبه
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+
+                        <!-- Message to the right -->
+                        <div class="direct-chat-msg right">
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                                <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                            </div>
+                            <!-- /.direct-chat-info -->
+                            <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                               بهترش کن
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+
+                        <!-- Message. Default to the left -->
+                        <div class="direct-chat-msg">
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                                <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
+                            </div>
+                            <!-- /.direct-chat-info -->
+                            <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                حله
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+
+                        <!-- Message to the right -->
+                        <div class="direct-chat-msg right">
+                            <div class="direct-chat-info clearfix">
+                                <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                                <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
+                            </div>
+                            <!-- /.direct-chat-info -->
+                            <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                            <!-- /.direct-chat-img -->
+                            <div class="direct-chat-text">
+                                باخس بابا
+                            </div>
+                            <!-- /.direct-chat-text -->
+                        </div>
+                        <!-- /.direct-chat-msg -->
+
+                    </div>
+                    <!--/.direct-chat-messages-->
+
+                    <!-- Contacts are loaded here -->
+                    <div class="direct-chat-contacts">
+                        <ul class="contacts-list">
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="dist/img/user1-128x128.jpg" alt="User Image">
+
+                                    <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Count Dracula
+                                  <small class="contacts-list-date pull-right">2/28/2015</small>
+                                </span>
+                                        <span class="contacts-list-msg">How have you been? I was...</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Image">
+
+                                    <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Sarah Doe
+                                  <small class="contacts-list-date pull-right">2/23/2015</small>
+                                </span>
+                                        <span class="contacts-list-msg">I will be waiting for...</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="dist/img/user3-128x128.jpg" alt="User Image">
+
+                                    <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Nadia Jolie
+                                  <small class="contacts-list-date pull-right">2/20/2015</small>
+                                </span>
+                                        <span class="contacts-list-msg">I'll call you back at...</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="dist/img/user5-128x128.jpg" alt="User Image">
+
+                                    <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Nora S. Vans
+                                  <small class="contacts-list-date pull-right">2/10/2015</small>
+                                </span>
+                                        <span class="contacts-list-msg">Where is your new...</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="dist/img/user6-128x128.jpg" alt="User Image">
+
+                                    <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  John K.
+                                  <small class="contacts-list-date pull-right">1/27/2015</small>
+                                </span>
+                                        <span class="contacts-list-msg">Can I take a look at...</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                            <li>
+                                <a href="#">
+                                    <img class="contacts-list-img" src="dist/img/user8-128x128.jpg" alt="User Image">
+
+                                    <div class="contacts-list-info">
+                                <span class="contacts-list-name">
+                                  Kenneth M.
+                                  <small class="contacts-list-date pull-right">1/4/2015</small>
+                                </span>
+                                        <span class="contacts-list-msg">Never mind I found...</span>
+                                    </div>
+                                    <!-- /.contacts-list-info -->
+                                </a>
+                            </li>
+                            <!-- End Contact Item -->
+                        </ul>
+                        <!-- /.contatcts-list -->
+                    </div>
+                    <!-- /.direct-chat-pane -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <form action="#" method="post">
+                        <div class="input-group">
+                            <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-warning btn-flat">Send</button>
+                          </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-footer-->
+            </div>
+            <!--/.direct-chat -->
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <!-- Info Boxes Style 2 -->
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">موجودی لباس</span>
+                <span class="info-box-number">{{count($fields['cloths'])}}</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 50%"></div>
+                </div>
+                <span class="progress-description direction">
+                    50% رشد در 30 روز
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">لایک ها</span>
+                <span class="info-box-number">{{$fields['likeCount']}}</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="progress-description direction">
+                    0% رشد در 30 روز
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+        <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="ion ion-ios-cloud-upload-outline"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">آپلود</span>
+                <span class="info-box-number">114,381 MB</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 70%"></div>
+                </div>
+                <span class="progress-description direction">
+                    70% رشد  در  30 روز
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+        <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">نظرات</span>
+                <span class="info-box-number">163</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 40%"></div>
+                </div>
+                <span class="progress-description">
+                    40% رشد در  30 روز
+                  </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+
+
+        <!-- /.box -->
+
+        <!-- PRODUCT LIST -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">لباس های به تازگی درج شده</h3>
+
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                 </div>
             </div>
-
-            <div class="panel-body">
-                <ul class="chat" id="chat-log-{!! $chats->srcid !!}">
-                    @foreach($chats->messages as $msg)
-                        @if( $msg->type=='Admin')
-
-                            <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="{!! $chats->desAvatar !!}" width="50" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                <strong class="primary-font">{!! $msg->type !!} </strong>
-                                <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i>{!! Helpers::time_elapsed_string($msg->updated_at) !!}
-                                </small>
-                            </div>
-                            <p>
-                                {!! $msg->msg !!}
-                            </p>
-
+            <!-- /.box-header -->
+            <div class="box-body">
+                <ul class="products-list product-list-in-box">
+                    @foreach($fields['cloths'] as $cloth)
+                    <li class="item">
+                        <div class="product-img">
+                            <img src="{{  ($cloth->images->toArray()==[])?"/dist/img/default-50x50.gif":$cloth->images['path']}} " alt="Product Image">
                         </div>
-
-                            </li>
-                        @else
-                            <li class="right clearfix">
-                                    <span class="chat-img pull-right">
-                                        <img src="{!! $chats->srcAvatar !!}" width="50" alt="User Avatar" class="img-circle" />
-                                    </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <small class=" text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i>{!! Helpers::time_elapsed_string( $msg->updated_at) !!}</small>
-                                        <strong class="pull-right primary-font">{!! $chats->name !!}</strong>
-                                    </div>
-                                    <p>
-                                        {!! $msg->msg !!}
-                                    </p>
-                                </div>
-                            </li>
-                        @endif
+                        <div class="product-info">
+                            <a href="javascript:void(0)" class="product-title">{{$cloth->title}}<br>
+                                @if($cloth->price==null)
+                                <span class="label label-warning pull-right">عدم فیمت</span>
+                                    @elseif($cloth->price!=null &&  $cloth->discount>0)
+                                    <span class="label label-info pull-right direction">{{$cloth->price}}   تومان</span>
+                                    @elseif($cloth->price!=null &&  $cloth->discount==0)
+                                    <span class="label label-success pull-right direction">{{$cloth->price}} تومان </span>
+                                    @endif
+                            </a>
+                            <br>
+                            <span class="product-description">
+                        {{Str::limit( $cloth->comment,20,"...")}}
+                        </span>
+                        </div>
+                    </li>
+                    <!-- /.item -->
                     @endforeach
+
 
                 </ul>
             </div>
-
-            <div class="panel-footer">
-                <div class="input-group">
-                    <input maxlength="126" id="msg-{!! $chats->srcid  !!}"  type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                    <span class="input-group-btn">
-                                    <button  class="btn btn-warning btn-sm" onclick="sendmsg({!! $chats->srcid  !!})">
-                                        Send
-                                    </button>
-                                </span>
-                </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+                <a href="javascript:void(0)" class="uppercase">نمایش تمام محصولات</a>
             </div>
-
+            <!-- /.box-footer -->
         </div>
-        <!--End Chat Panel Example-->
+        <!-- /.box -->
     </div>
-    @endforeach
 
 </div>
-@endif
+@section('LABEL')
+    @if(Auth::user()->type==1 || Auth::user()->type==2)
+        <li class="header">آمار کاربران</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>   {{count($fields['CustomerCount'])}} مشتری </span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>   {{$fields['sellers']}} فروشنده</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>   {{$fields['designerCount'] }} طراح لباس</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>  {{count($fields['sets'])}} ست لباس </span></a></li>
+    @endif
+    @if(Auth::user()->type==1)
+        <li><a href="#"><i class="fa fa-circle-o text-fuchsia"></i> <span>  {{$fields['operatorCount']}} اپراتور</span></a></li>
+    @endif
+@endsection
 @section("JS")
     <script src="assets/scripts/admin.js"></script>
 

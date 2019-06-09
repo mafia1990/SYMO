@@ -14,7 +14,7 @@ class CreateSeasonSetPivotTable extends Migration
     public function up()
     {
         Schema::create('season_set', function (Blueprint $table) {
-            $table->unsignedBigInteger('season_id');
+            $table->unsignedSmallInteger('season_id');
             $table->unsignedBigInteger('set_id');
             $table->foreign('season_id')->references('id')->on('seasons')->onDelete('cascade');
             $table->foreign('set_id')->references('id')->on('sets')->onDelete('cascade');

@@ -7,12 +7,12 @@
 
         <div class="row">
             <div class="col-md-4 col-md-offset-4 text-center logo-margin ">
-                <img src="assets/img/logo.png" alt=""/>
+                <object type="image/svg+xml" data="/images/SYMO.svg" width="300px" alt="" ></object>
             </div>
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Please Sign In</h3>
+                        <h3 class="panel-title">لطفا مشخصات اکانت کاربری خود را وارد کنید</h3>
                     </div>
                     <div class="panel-body">
                         <form role="form" method="POST" action="{{ route('login') }}">
@@ -26,7 +26,7 @@
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('ایمیل') }}</strong>
                                     </span>
                                     @endif
 
@@ -39,7 +39,7 @@
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('پسورد') }}</strong>
                                     </span>
                                     @endif
 
@@ -51,7 +51,7 @@
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                             <label class="form-check-label" for="remember">
-                                                {{ __('Remember Me') }}
+                                                {{ __('مرا بخاطر بسپار') }}
                                             </label>
                                         </div>
                                     </div>
@@ -61,12 +61,12 @@
                                     <div class="col-md-12 offset-md-4">
 
                                         <button type="submit" class="btn btn-lg btn-success btn-login btn-block">
-                                            {{ __('Login') }}
+                                            {{ __('ورود') }}
                                         </button>
 
                                         @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('Forgot Your Password?') }}
+                                                {{ __('پسورد خود را فراموش کرده اید؟') }}
                                             </a>
                                         @endif
                                     </div>
