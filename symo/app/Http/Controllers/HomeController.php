@@ -36,7 +36,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $user=Auth::user();
         $fields['name']=$user->name;
         if($user->type==1){
@@ -45,13 +44,8 @@ class HomeController extends Controller
             $fields['sellersCount'] =User::where('type',5)->where('status',1)->count();
             $fields['sellers'] =User::where('type',5)->count();
             $fields['clothUnverifyCount']=  Cloth::where('status','1')->count();
-            $fields['cloths']=  Cloth::with('images')->orderBy('created_at','desc')->get();
+            $fields['cloths']=  Cloth::with('images')->get();
             $fields['likeCount']=  Like::all()->count();
-        //    $clothCountbyweek = Cloth::select( DB::raw('count(id) as total'))
-           //     ->groupBy(DB::raw('WEEK(created_at)'))->orderBy('created_at')->limit(2)->get();
-
-
-
             $fields['userUnverifyCustomerCount'] =User::where('type',4)->where('status',1)->count();
             $fields['userCustomerCount'] = User::where('type',4)->where('status',2)->count();
             $fields['CustomerCount'] = User::where('type',4)->get();
@@ -63,7 +57,26 @@ class HomeController extends Controller
             $fields['orders']= 0;
             $fields['space']= 0;
             $fields['sessionchats']= [];
+
+            ///////////////////////////////
+            /// check rate growth
+            /////////////////////////////////
+            $clothCountbyweek = Cloth::select( DB::raw('count(id) as total'))
+                ->groupBy(DB::raw('WEEK(created_at)'))->orderBy('created_at')->limit(2)->get();
+            if($clothCountbyweek==null)
+            $fields['rateCloths']=Helpers::growth_rate_check($clothCountbyweek[1]['total'],$clothCountbyweek[0]['total']);
+                else $fields['rateCloths']=0;
+            $likeCountbyweek = Like::select( DB::raw('count(id) as total'))
+                ->groupBy(DB::raw('WEEK(created_at)'))->orderBy('created_at')->limit(2)->get();
+            if(count($likeCountbyweek))
+            $fields['rateLikes']=Helpers::growth_rate_check($likeCountbyweek[1]['total'],$likeCountbyweek[0]['total']);
+            else  $fields['rateLikes']=0;
+
+            $fields['rateComment']=30;
+            $fields['rateUpload']=20;
+            ///////////////
             session()->put('permission', Auth::user()->type);
+
             return view('pages.dashboard')->with("fields",$fields);
         }
 

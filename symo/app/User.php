@@ -53,8 +53,19 @@ class User extends Authenticatable
     }
     /*adding image path */
     function getAvatarAttribute($value){
-        if($value!="")
-            return '/images/users/'.$value;
+        if($value!=""){
+
+            if($this->attributes['type']==2)
+                return '/images/users/operators/'.$value;
+            if($this->attributes['type']==3)
+                return '/images/users/designers/'.$value;
+            if($this->attributes['type']==4)
+                return '/images/users/'.$value;
+            if($this->attributes['type']==5)
+                return '/images/users/selers/'.$value;
+
+                return '/images/users/'.$value;
+        }
         else return $value;
     }
 }

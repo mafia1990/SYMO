@@ -39,12 +39,12 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('clothes.index')}}"><i class="fa fa-circle-o"></i> مدیریت لباس ها </a></li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i>  مدیریت ست ها</a></li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i>  مدیریت فروشندگان</a></li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i>  مدیریت کاربران</a></li>
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i>  مدیریت طراحان</a></li>
+                    <li><a href="{{route('sets.index')}}"><i class="fa fa-circle-o"></i>  مدیریت ست ها</a></li>
+                    <li><a href="{{route('sellers.index')}}"><i class="fa fa-circle-o"></i>  مدیریت فروشندگان</a></li>
+                    <li><a href="{{route('customers.index')}}"><i class="fa fa-circle-o"></i>  مدیریت کاربران</a></li>
+                    <li><a href="{{route('designers.index')}}"><i class="fa fa-circle-o"></i>  مدیریت طراحان</a></li>
                     @if(Auth::user()->type==1)
-                    <li><a href="index2.html"><i class="fa fa-circle-o"></i>  مدیریت اپراتور ها</a></li>
+                    <li><a href="{{route('operators.index')}}"><i class="fa fa-circle-o"></i>  مدیریت اپراتور ها</a></li>
                         @endif
                 </ul>
             </li>
@@ -56,6 +56,7 @@
             </li>
             @endif
            @yield("LABEL")
+
         </ul>
     </section>
     <!-- /.sidebar -->

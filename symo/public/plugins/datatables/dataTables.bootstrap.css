@@ -1,3 +1,7 @@
+.table-responsive{
+	overflow-x: hidden !important;
+
+}
 div.dataTables_length label {
 	font-weight: normal;
 	text-align: left;
@@ -10,7 +14,7 @@ div.dataTables_length select {
 }
 
 div.dataTables_filter {
-	text-align: right;
+	text-align: left;
 }
 
 div.dataTables_filter label {

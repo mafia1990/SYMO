@@ -387,10 +387,14 @@
                 <span class="info-box-number">{{count($fields['cloths'])}}</span>
 
                 <div class="progress">
-                    <div class="progress-bar" style="width: 50%"></div>
+                    <div class="progress-bar" style="width: {{$fields['rateCloths']}}%"></div>
                 </div>
                 <span class="progress-description direction">
-                    50% رشد در 30 روز
+                    @if($fields['rateCloths']>0)
+                        {{$fields['rateCloths']}}% رشد نسبت به هفته قبل
+                        @else
+                        {{$fields['rateCloths']}}% سقوط نسبت به هفته قبل
+                        @endif
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -404,10 +408,14 @@
                 <span class="info-box-number">{{$fields['likeCount']}}</span>
 
                 <div class="progress">
-                    <div class="progress-bar" style="width: 0%"></div>
+                    <div class="progress-bar" style="width: {{$fields['rateLikes']}}%"></div>
                 </div>
                 <span class="progress-description direction">
-                    0% رشد در 30 روز
+                    @if($fields['rateLikes']>0)
+                        {{$fields['rateLikes']}}% رشد نسبت به هفته قبل
+                    @else
+                        {{$fields['rateLikes']}}% سقوط نسبت به هفته قبل
+                    @endif
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -421,10 +429,14 @@
                 <span class="info-box-number">114,381 MB</span>
 
                 <div class="progress">
-                    <div class="progress-bar" style="width: 70%"></div>
+                    <div class="progress-bar" style="width: {{$fields['rateUpload']}}%"></div>
                 </div>
                 <span class="progress-description direction">
-                    70% رشد  در  30 روز
+                   @if($fields['rateUpload']>0)
+                        {{$fields['rateUpload']}}% رشد نسبت به هفته قبل
+                    @else
+                        {{$fields['rateUpload']}}% سقوط نسبت به هفته قبل
+                    @endif
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -438,10 +450,14 @@
                 <span class="info-box-number">163</span>
 
                 <div class="progress">
-                    <div class="progress-bar" style="width: 40%"></div>
+                    <div class="progress-bar" style="width: {{$fields['rateComment']}}%"></div>
                 </div>
                 <span class="progress-description">
-                    40% رشد در  30 روز
+                    @if($fields['rateComment']>0)
+                        {{$fields['rateComment']}}% رشد نسبت به هفته قبل
+                    @else
+                        {{$fields['rateComment']}}% سقوط نسبت به هفته قبل
+                    @endif
                   </span>
             </div>
             <!-- /.info-box-content -->
@@ -468,7 +484,7 @@
                     @foreach($fields['cloths'] as $cloth)
                     <li class="item">
                         <div class="product-img">
-                            <img src="{{  ($cloth->images->toArray()==[])?"/dist/img/default-50x50.gif":$cloth->images['path']}} " alt="Product Image">
+                            <img src="{{ ($cloth->images->toArray()==[])?"/dist/img/default-50x50.gif":$cloth->images[0]['path']}} " alt="Product Image">
                         </div>
                         <div class="product-info">
                             <a href="javascript:void(0)" class="product-title">{{$cloth->title}}<br>

@@ -31,7 +31,7 @@
                         <td> {{user['phone']}}</td>
                         <td>{{user['platform']}}</td>
                         <td class="text-center">
-                            <img v-if="user['avatar']==''"  width="50" class=" img-circle" src="/assets/img/user.jpg"/>
+                            <img v-if="user['avatar']==''"  width="50" class=" img-circle" src="/images/users/user.jpg"/>
                             <img v-else class=" img-circle" width="50" :src="user['avatar']"/>
                         </td>
                         <td class="text-center">

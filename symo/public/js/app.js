@@ -39557,7 +39557,7 @@ var render = function() {
                     user["avatar"] == ""
                       ? _c("img", {
                           staticClass: " img-circle",
-                          attrs: { width: "50", src: "/assets/img/user.jpg" }
+                          attrs: { width: "50", src: "/images/users/user.jpg" }
                         })
                       : _c("img", {
                           staticClass: " img-circle",

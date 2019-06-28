@@ -17,10 +17,15 @@ Auth::routes();
 Route::group(['middleware'=>'auth'],function(){
    Route::get('/','HomeController@index')->name('home');
     Route::group(['prefix'=>'admin/'],function($id){
-       Route::resource('customers','Admin\CustomerController');
+       Route::resource('customers','Admin\CustomersController');
+       Route::resource('operators','Admin\OperatorsController');
+       Route::resource('sellers','Admin\SellersController');
+       Route::resource('designers','Admin\DesignersController');
+       Route::resource('sets','Admin\SetsController');
        Route::resource('clothes','Admin\ClothesController');
        Route::resource('settings','Admin\SettingController');
-       Route::resource('sets','Admin\SetsController');
+       Route::post('oplist','Admin\OperatorsController@datatable')->name('get.data');
+       Route::get('oplist','Admin\OperatorsController@datatable')->name('get.data');
 
     });
 });
