@@ -13,9 +13,11 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
+
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('path');
+            $table->string('name');
             $table->unsignedBigInteger('cloth_id');
             $table->foreign('cloth_id')->references('id')->on('cloths')->onDelete('cascade');
 
@@ -32,4 +34,5 @@ class CreateImagesTable extends Migration
     {
         Schema::dropIfExists('images');
     }
+
 }

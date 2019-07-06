@@ -16,8 +16,10 @@ class CreateClothsTable extends Migration
         Schema::create('cloths', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->unsignedSmallInteger('shop_id');
             $table->text('comment')->nullable();
             $table->tinyInteger('status');
+            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
             $table->timestamps();
         });
     }

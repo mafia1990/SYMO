@@ -16,7 +16,12 @@ class Category extends Model
     public function getImageAttribute($value)
     {
         if($value!="")
-            return 'images/cats/'.$value;
+            return '/images/cats/'.$value;
         else return $value;
     }
+    public function categoryproperties()
+    {
+        return $this->hasMany(CategoryProperty::class);
+    }
+
 }

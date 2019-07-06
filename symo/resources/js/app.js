@@ -22,8 +22,8 @@ window.Vue = require('vue');
 
 
 Vue.component('admin-customer-component', require('./components/admin-customer-component.vue').default);
-Vue.component('admin-clothes-component', require('./components/admin-clothes-component.vue').default);
 Vue.component('admin-create-cloth-component', require('./components/admin-create-cloth-component.vue').default);
+Vue.component('admin-edit-cloth-component', require('./components/admin-edit-cloth-component.vue').default);
 Vue.component('admin-settings-component', require('./components/admin-settings-component.vue').default);
 Vue.component('admin-sets-component', require('./components/admin-sets-component.vue').default);
 Vue.component('admin-create-set-component', require('./components/admin-create-set-component.vue').default);

@@ -16,8 +16,9 @@ class CreateCategoryPropertiesTable extends Migration
         Schema::create('category_properties', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->unsignedSmallInteger('catid');
-            $table->foreign('catid')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedSmallInteger('category_id');
+            $table->boolean('multiselect')->nullable(true);
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
 
             $table->timestamps();

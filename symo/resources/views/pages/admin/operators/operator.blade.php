@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <!-- Advanced Tables -->
 
-            <div id="app">
+            <div >
                 <div class="panel panel-default">
                     <div class="panel-heading   " style="display:  flow-root;">
                         <span class="float-right">مشخصات کاربران</span>
@@ -71,8 +71,10 @@
                 processing: true,
                 serverSide: true,
                 "bPaginate": true,
-                ajax: '{!! route('get.data') !!}',
-
+               ajax: {
+                   "url":'{!! route('get.op.data') !!}',
+                   "type": "POST"
+               },
                 columns: [
 
                     {data: 'id',},
@@ -91,7 +93,7 @@
                         data: null,
                         render: function (data, type, row) {
 
-                            return '<a href="/admin/operators/' + data.id + '/edit class="editor_edit">Edit</a> / <a href="javascript:void(0)" onclick="delete_user(this,' + data.id + ')" class="editor_remove">Delete</a>';
+                            return '<a href="/admin/operators/' + data.id + '/edit" class="editor_edit">Edit</a> / <a href="javascript:void(0)" onclick="delete_user(this,' + data.id + ')" class="editor_remove">Delete</a>';
 
                         }
                     }

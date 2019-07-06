@@ -16,8 +16,8 @@ class CreateCategoryPropertyDataTable extends Migration
         Schema::create('category_property_data', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('catpid');
-            $table->foreign('catpid')->references('id')->on('category_properties')->onDelete('cascade');
+            $table->unsignedInteger('categoryproperties_id');
+            $table->foreign('categoryproperties_id')->references('id')->on('category_properties')->onDelete('cascade');
 
             $table->timestamps();
         });

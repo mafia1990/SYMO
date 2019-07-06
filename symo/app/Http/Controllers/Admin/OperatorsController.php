@@ -18,7 +18,7 @@ class OperatorsController extends Controller
      * 2 operator
      * 3 designer
      * 4 customer
-     * 5 seler
+     * 5 seller
      * @return \Illuminate\Http\Response
      */
     public function index()

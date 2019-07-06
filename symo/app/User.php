@@ -40,12 +40,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'mobile_verified_at' => 'datetime',
     ];
 
     public function  roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+    public function  shops()
+    {
+        return $this->belongsToMany(Shop::class);
     }
     public function  sets()
     {
@@ -62,7 +66,7 @@ class User extends Authenticatable
             if($this->attributes['type']==4)
                 return '/images/users/'.$value;
             if($this->attributes['type']==5)
-                return '/images/users/selers/'.$value;
+                return '/images/users/sellers/'.$value;
 
                 return '/images/users/'.$value;
         }

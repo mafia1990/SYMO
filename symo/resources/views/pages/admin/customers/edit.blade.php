@@ -3,11 +3,11 @@
 @extends('layouts.masterdashboard')
 
 @section('BODY')
-    <div class="row ">
+    <div class="row direction">
 
-        <div class="col-md-12">
+        <div class="col-md-12 direction">
             @if (session('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success direction">
                     {{ session('success') }}
                 </div>
             @endif
@@ -25,14 +25,14 @@
             <div class="card">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <i class="fa fa-user fa-fw"></i>Create profile
+                        <i class="fa fa-user fa-fw"></i>ویرایش پروفایل
 
                     </div>
                     <div class="panel-body">
                         {!! Form::model($fields,['method'=>'PATCH', 'route'=>['customers.update',$fields['id']], 'enctype' => 'multipart/form-data'])  !!}
                             <div class="col-lg-6">
                                 <div class="form-group col-md-12 row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('نام') }}</label>
 
                                     <div class="col-md-8">
                                         {{Form::text("name",$fields["name"] ,
@@ -45,16 +45,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 row">
-                                    <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}</label>
+                                    <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('جنسیت') }}</label>
 
                                     <div class="col-md-8 "  >
 
-                                        {!! Form::radio("gender",0,$fields["gender"]==0?true:false) !!}Man
-                                        {!! Form::radio("gender",1,$fields["gender"]==1?true:false) !!}Woman
+                                        {!! Form::radio("gender",0,$fields["gender"]==0?true:false) !!}مرد
+                                        {!! Form::radio("gender",1,$fields["gender"]==1?true:false) !!}زن
                                 </div>
                                 </div>
                                 <div class="form-group col-md-12 row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('ایمیل آدرس') }}</label>
 
                                     <div class="col-md-8">
                                         {!! Form::email("email",$fields["email"],[
@@ -66,7 +66,7 @@
                                 </div>
 
                                 <div class="form-group col-md-12 row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('کلمه عبور') }}</label>
 
                                     <div class="col-md-8">
                                             {!! Form::password("password",[
@@ -75,7 +75,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 row">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار کلمه عبور') }}</label>
 
                                     <div class="col-md-8">
                                         {!! Form::password("password_confirmation",[
@@ -88,7 +88,7 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group col-md-12 row">
-                                    <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile') }}</label>
+                                    <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('موبایل') }}</label>
 
                                     <div class="col-md-8">
                                         {!! Form::text("mobile",$fields["mobile"],[
@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12 row" id="phoneField">
-                                    <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
+                                    <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('تلفن') }}</label>
 
                                     <div class="col-md-8">
                                         {!! Form::text("phone",$fields["phone"],[
@@ -111,10 +111,10 @@
                                 </div>
 
                                 <div class="form-group col-md-12 row">
-                                    <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('Avatar') }}</label>
+                                    <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('عکس پروفایل') }}</label>
 
                                     <div class="col-md-8">
-                                    {!! Form::file("file",[
+                                    {!! Form::file("avatar",[
                                     "class"=>" form-control",
 
                                     ]) !!}
@@ -136,13 +136,13 @@
                                     {{--</div>--}}
                                 {{--</div>--}}
                                 <div class="form-group col-md-12 row">
-                                    <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('Status') }}</label>
+                                    <label for="status" class="col-md-4 col-form-label text-md-right">{{ __('وضعیت کاربری') }}</label>
 
                                     <div class="col-md-8 "  >
 
-                                        {!! Form::radio("status",0,$fields["status"]==0?true:false) !!}Block
-                                        {!! Form::radio("status",1,$fields["status"]==1?true:false) !!}Deactive
-                                        {!! Form::radio("status",2,$fields["status"]==2?true:false) !!}Active
+                                        {!! Form::radio("status",0,$fields["status"]==0?true:false) !!}بلاک
+                                        {!! Form::radio("status",1,$fields["status"]==1?true:false) !!}غیرفعال
+                                        {!! Form::radio("status",2,$fields["status"]==2?true:false) !!}فعال
 
 
 
@@ -151,10 +151,10 @@
                                 </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 offset-md-4">
-                                    {!! Form::submit("Update",[
+                                    {!! Form::submit("به روز رسانی",[
                                     "class"=>"btn btn-success"
                                     ]) !!}
-                                    {!! Form::reset("Clear",[
+                                    {!! Form::reset("پاک کردن فرم",[
                                     "class"=>"btn btn-primary"
                                     ]) !!}
 

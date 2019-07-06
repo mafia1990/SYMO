@@ -7,6 +7,7 @@ use App\Http\Requests\CustomerRequest;
 use App\Http\Requests\CustomerUpdateRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CustomersController extends Controller
 {
@@ -22,10 +23,7 @@ class CustomersController extends Controller
      */
     public function index()
     {
-        $fields = [];
-        $fields['xc'] = "C";
-        $fields['customers'] = User::where('type', '4')->get();
-        return view('pages.Admin.customers.customer')->with(['fields' => $fields]);
+        return view('pages.Admin.customers.customer');
     }
 
     /**
@@ -132,4 +130,10 @@ class CustomersController extends Controller
             return response("ok");
 
         }
+
+    public function datatable()
+    {
+
+        return DataTables::of(User::all()->where('type','4'))->make(true);
+    }
     }

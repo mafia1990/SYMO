@@ -1,85 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" >
 
-@extends('layouts.master_login')
-@section('BODY')
-    <body class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <div class="container">
+    <title>فرم ورود</title>
+    <script src="/plugins/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
 
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4 text-center logo-margin ">
-                <object type="image/svg+xml" data="/images/SYMO.svg" width="300px" alt="" ></object>
-            </div>
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">لطفا مشخصات اکانت کاربری خود را وارد کنید</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="POST" action="{{ route('login') }}">
-                            <fieldset>
-                                @csrf
-
-                                <div class="form-group">
+    <link rel="stylesheet" href="/plugins/meyer-reset/2.0/reset.min.css">
 
 
-                                    <input id="email" type="email" placeholder="E-mail"  class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('ایمیل') }}</strong>
-                                    </span>
-                                    @endif
-
-                                </div>
-
-                                <div class="form-group ">
+    <link rel="stylesheet" href="/css/login/style.css">
 
 
-                                    <input id="password"  placeholder="Password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+</head>
 
-                                    @if ($errors->has('password'))
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('پسورد') }}</strong>
-                                    </span>
-                                    @endif
+<body>
 
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-md-6 offset-md-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                            <label class="form-check-label" for="remember">
-                                                {{ __('مرا بخاطر بسپار') }}
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-12 offset-md-4">
-
-                                        <button type="submit" class="btn btn-lg btn-success btn-login btn-block">
-                                            {{ __('ورود') }}
-                                        </button>
-
-                                        @if (Route::has('password.request'))
-                                            <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                {{ __('پسورد خود را فراموش کرده اید؟') }}
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="form">
+    <div class="forceColor"></div>
+    <div class="topbar">
+        <div class="spanColor"></div>
+        <form method="post">
+        <input type="text" class="input" id="password" name="mobile" placeholder="شماره موبایل"/>
+            @csrf
+        </form>
     </div>
+    <button class="submit" id="submit" >ورود</button>
+</div>
+
+{{--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>--}}
+<script src="/plugins/jQuery/jQuery-2.2.0.min.js"></script>
 
 
 
-    </body>
-@endsection
+<script >
+
+
+    var form = $('.form');
+    var btn = $('#submit');
+    var topbar = $('.topbar');
+    var input = $('#password');
+    var article =$('.article');
+    var tries = 0;
+    var h = input.height();
+    $('.spanColor').height(h+23);
+    $('#findpass').on('click',function(){
+        $(this).text('1234567890');
+    });
+    input.on('focus',function(){
+        topbar.removeClass('error success');
+        input.text('');
+    });
+    btn.on('click',function(event){
+        event.preventDefault();
+        if(tries<=2){
+            var pass = $('#password').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.post('/login',[{'mobile':pass,'csrf-token':"{{csrf_token()}}"}]).done(function(){
+                setTimeout(function(){
+                    btn.text('Success!');
+                },250);
+                topbar.addClass('success');
+                form.addClass('goAway');
+                article.addClass('active');
+                tries=0;
+                document.location='/';
+
+            }).fail(function () {
+                topbar.addClass('error');
+                tries++;
+                switch(tries){
+                    case 0:
+                        btn.text('Login');
+                        break;
+                    case 1:
+                        setTimeout(function(){
+                            btn.text('You have 2 tries left');
+                        },300);
+                        break;
+                    case 2:
+                        setTimeout(function(){
+                            btn.text('Only 1 more');
+                        },300);
+                        break;
+                    case 3:
+                        setTimeout(function(){
+                            btn.text('Recover password?');
+                        },300);
+                        input.prop('disabled',true);
+                        topbar.removeClass('error');
+                        input.addClass('disabled');
+                        btn.addClass('recover');
+                        break;
+                        defaut:
+                            btn.text('Login');
+                        break;
+                }
+
+            });
+            }
+        else{
+            topbar.addClass('disabled');
+        }
+
+    });
+
+    $('.form').keypress(function(e){
+        if(e.keyCode==13)
+            submit.click();
+    });
+    input.keypress(function(){
+        topbar.removeClass('success error');
+    });
+</script>
+
+
+
+
+</body>
+
+</html>

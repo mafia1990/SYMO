@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\CustomerRequest;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 
 class DesignersController extends Controller
 {
@@ -14,7 +17,10 @@ class DesignersController extends Controller
      */
     public function index()
     {
-        //
+        $fields=[];
+        $fields['designers']= User::where("type",3)->get();
+        return view("pages.admin.designers.designer")->with('fields',$fields);
+
     }
 
     /**
@@ -24,7 +30,8 @@ class DesignersController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.designers.create');
+
     }
 
     /**
@@ -33,9 +40,29 @@ class DesignersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+        $user = new User();
+
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->password = bcrypt($request['password']);
+        $user->phone = $request['phone'];
+        $user->mobile = $request['mobile'];
+        $user->address = $request['address'];
+        $user->status = $request['status'];
+        $user->type =3;
+        $user->gender = $request['gender'];
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/users/designers');
+            $image->move($destinationPath, $imagename);
+            $user->avatar = $imagename;
+        }
+        $user->save();
+        return redirect()->back()->withSuccess('با موفقیت اطلاعات شما ثبت شده است.');
+
     }
 
     /**
@@ -57,7 +84,9 @@ class DesignersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fields = User::find($id);
+
+        return view("pages.admin.designers.edit")->with('fields', $fields);
     }
 
     /**
@@ -67,9 +96,39 @@ class DesignersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomerRequest $request, $id)
     {
-        //
+        if ($request->has('statusChange')) {
+
+            $user = User::where('id',$request['id'])->where('type','3')->first();
+            if($user==null)  return response("not exist",404);
+            if ($user->status == 2) $user->status = 0;
+            else $user->status = 2;
+            $user->save();
+            return response("ok");
+        }
+        $this->validate(   $request,['email' => 'unique:users,email,'.$id]);
+        $user=User::where('id',$id)->where('type',3)->first();
+        if($user==null) return response("",400);
+        if($request['password']=="")
+            $request['password']=$user->password;
+        $user->name = $request['name'];
+        $user->email = $request['email'];
+        $user->phone = $request['phone'];
+        $user->mobile = $request['mobile'];
+        $user->address = $request['address'];
+        $user->status = $request['status'];
+        $user->gender = $request['gender'];
+
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $imagename = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/images/users/designers');
+            $image->move($destinationPath, $imagename);
+            $user->avatar = $imagename;
+        }
+        $user->save();
+        return back()->withSuccess('به روز رسانی با موفقیت انجام شد');
     }
 
     /**
@@ -78,8 +137,15 @@ class DesignersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        return response("ok");
+    }
+    public function datatable()
+    {
+
+        return DataTables::of(User::all()->where('type','3'))->make(true);
     }
 }

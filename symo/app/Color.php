@@ -10,4 +10,9 @@ class Color extends Model
     {
         return $this->belongsToMany(Cloth::class);
     }
+
+    public function getCodeAttribute($value)
+    {
+        return '#'.$value;
+    }
 }

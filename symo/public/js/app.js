@@ -1688,116 +1688,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-clothes-component.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-clothes-component.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "admin-clothes-component",
-  props: ['data'],
-  data: function data() {
-    return {
-      clothes: this.data['clothes']
-    };
-  },
-  methods: {
-    delete_clothes: function delete_clothes() {
-      var selected = [];
-      $('input:checked').each(function (e) {
-        var id = $(this).attr('value');
-        axios["delete"]('/admin/clothes/' + id).then(function (res) {
-          $("#cloth-" + id).remove();
-        })["catch"](function (err) {
-          console.error(err);
-        });
-      });
-    }
-  },
-  beforeMount: function beforeMount() {}
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-create-cloth-component.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-create-cloth-component.vue?vue&type=script&lang=js& ***!
@@ -1879,16 +1769,106 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "admin-create-cloth-component",
   props: ['data'],
   data: function data() {
     return {
       cats: this.data['cats'],
-      colors: this.data['colors']
+      shops: this.data['shops'],
+      colors: this.data['colors'],
+      sex_selected: []
     };
   },
   methods: {
+    showDiscount: function showDiscount(type) {
+      if (type) {
+        document.getElementById('discount_precent').classList.add("hidden");
+        document.getElementById('discount_amount').classList.remove("hidden");
+        return;
+      }
+
+      document.getElementById('discount_precent').classList.remove("hidden");
+      document.getElementById('discount_amount').classList.add("hidden");
+    },
+    checkcat: function checkcat() {
+      var sex = this.sex_selected;
+      var options = "<option></option>";
+      this.cats.forEach(function (cat) {
+        if (cat.sex == sex) options += "<option value='" + cat.id + "'>" + cat.name + "<option>";
+      });
+      document.getElementById('categorySelect').removeAttribute('disabled');
+      document.getElementById('categorySelect').innerHTML = options;
+    },
     checkClick: function checkClick() {
       if (event.target.tagName == "INPUT" && event.target.parentElement.style.opacity != .4) {
         event.target.parentElement.style.opacity = .4;
@@ -1897,11 +1877,6 @@ __webpack_require__.r(__webpack_exports__);
         event.target.parentElement.style.opacity = 1;
         event.target.parentElement.style.margin = "5px";
       }
-    },
-    loaddatacloth: function loaddatacloth() {
-      var id = event.target.value;
-      $('#load_cloth_properties').html("");
-      $('#load_cloth_properties').load('/fetchcatp?id=' + id);
     }
   }
 });
@@ -2178,6 +2153,122 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['data'],
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-edit-cloth-component.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2209,55 +2300,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "admin-create-cloth-component",
   props: ['data'],
   data: function data() {
     return {
-      customers: this.data['customers'],
-      xc: this.data['xc']
+      cats: this.data['cats'],
+      pcats: this.data['pcats'],
+      pcatsd: this.data['pcatsd'],
+      colors: this.data['colors'],
+      catid: this.data['catid'],
+      shops: this.data['shops'],
+      cloth: this.data['cloth'],
+      pclothd: this.data['pclothd'],
+      cloth_colors: this.data['clothColors'],
+      cloth_images: this.data['clothImages'],
+      sex_selected: this.data.cloth.sex
     };
   },
   methods: {
-    delete_user: function delete_user(id) {
-      var e = event;
-      axios.post('/admin/customers/' + id, {
-        '_method': 'DELETE',
-        'id': id
-      }).then(function (res) {
-        for (var i = 0; i < 4; i++) {
-          if (e.path[i].tagName == "TR") {
-            e.path[i].remove();
-            break;
-          }
-        }
-      })["catch"](function (err) {
-        console.log(err);
+    checkcat: function checkcat() {
+      var sex = this.sex_selected;
+      var options = "<option></option>";
+      this.cats.forEach(function (cat) {
+        if (cat.sex == sex) options += "<option value='" + cat.id + "'>" + cat.name + "<option>";
       });
+      document.getElementById('categorySelect').removeAttribute('disabled');
+      document.getElementById('categorySelect').innerHTML = options;
     },
-    verify_user: function verify_user(id) {
-      var e = event;
-      axios.post('/admin/customers/' + id, {
-        '_method': 'PATCH',
-        'id': id,
-        'statusChange': "true"
-      }).then(function (res) {
-        if (e.path[0].classList.contains("btn") && e.path[0].classList.contains("btn-success")) {
-          e.path[0].classList.remove("btn-success");
-          e.path[0].classList.add("btn-default");
-        } else if (e.path[0].classList.contains("btn")) {
-          e.path[0].classList.add("btn-success");
-          e.path[0].classList.remove("btn-default");
+    isChecked: function isChecked(id) {
+      if (id == this.cloth) self.isChecked = true;
+    },
+    isExist: function isExist(pcatd_id) {
+      var res = this.pclothd.some(function (pcloth_data) {
+        if (pcloth_data.category_property_data_id == pcatd_id) {
+          return "selected";
         }
 
-        if (e.path[1].classList.contains("btn-success")) {
-          e.path[1].classList.remove("btn-success");
-          e.path[1].classList.add("btn-default");
-        } else {
-          e.path[1].classList.add("btn-success");
-          e.path[1].classList.remove("btn-default");
-        }
-      })["catch"](function (err) {
-        console.log(err);
+        return false;
       });
+      return res;
+    },
+    isExistColor: function isExistColor(color_id) {
+      var ress = this.cloth_colors.some(function (cloth_color) {
+        if (cloth_color.pivot.color_id == color_id) {
+          return true;
+        }
+
+        return false;
+      });
+      console.log(ress);
+      return ress;
     }
   }
 });
@@ -7187,7 +7279,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.color-choose{\n    float: left;\n    margin: 5px;\n    width: 70px;\n    height: 70px;\n}\n\n", ""]);
+exports.push([module.i, "\n.color-choose {\n    float: left;\n    margin: 5px;\n    width: 70px;\n    height: 70px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.color-choose {\n    float: left;\n    margin: 5px;\n    width: 70px;\n    height: 70px;\n}\n\n", ""]);
 
 // exports
 
@@ -38065,6 +38176,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -38649,228 +38790,6 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel panel-default" }, [
-    _c("div", { staticClass: "panel-heading" }, [
-      _c("i", { staticClass: "fa fa-user fa-fw" }),
-      _vm._v("Clothes properties\n        "),
-      _c("div", { staticClass: "pull-right" }, [
-        _c("div", { staticClass: "btn-group" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "dropdown-menu pull-right",
-              attrs: { role: "menu" }
-            },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "javascript:void();" },
-                    on: { click: _vm.delete_clothes }
-                  },
-                  [_vm._v("Delete Clothes")]
-                )
-              ])
-            ]
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
-        _c(
-          "table",
-          {
-            staticClass:
-              "table table-striped table-bordered table-hover direction",
-            attrs: { id: "dataTables-example" }
-          },
-          [
-            _vm._m(2),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.clothes, function(cloth) {
-                return _c(
-                  "tr",
-                  {
-                    class: "odd grade" + _vm.data["xc"],
-                    attrs: { id: "cloth-" + cloth["id"] }
-                  },
-                  [
-                    _c("td", [
-                      _c("input", {
-                        attrs: { type: "checkbox" },
-                        domProps: { value: cloth["id"] }
-                      }),
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(cloth["id"]) +
-                          "\n\n                    "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(cloth["title"]) + " ")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("  " + _vm._s(cloth.category["name"]))]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      cloth.images.length > 0
-                        ? _c("img", {
-                            staticClass: " img-circle",
-                            attrs: {
-                              width: "50px",
-                              height: "50px",
-                              src: cloth.images[0].path
-                            }
-                          })
-                        : _c("img", {
-                            staticClass: " img-circle",
-                            attrs: { width: "50px", height: "50px" }
-                          })
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "text-center" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger btn-circle",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.delete_cloth(cloth["id"])
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-times" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        { attrs: { href: "clothes/" + cloth["id"] + "/edit" } },
-                        [_vm._m(3, true)]
-                      ),
-                      _vm._v(" "),
-                      cloth["status"] == 2
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success  btn-circle",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.verify_user(cloth["id"])
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fa fa-check" })]
-                          )
-                        : _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-default  btn-circle",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.verify_user(cloth["id"])
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fa fa-check" })]
-                          )
-                    ])
-                  ]
-                )
-              }),
-              0
-            )
-          ]
-        )
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "btn btn-default btn-xs dropdown-toggle",
-        attrs: { type: "button", "data-toggle": "dropdown" }
-      },
-      [
-        _vm._v("\n                    Actions\n                    "),
-        _c("span", { staticClass: "caret" })
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c("a", { attrs: { href: "./clothes/create" } }, [_vm._v("Add cloth")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Cloth ID")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Title")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Category")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Image")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Operation")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary btn-circle", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fa fa-list" })]
-    )
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-create-cloth-component.vue?vue&type=template&id=0134a8c2&":
 /*!*******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-create-cloth-component.vue?vue&type=template&id=0134a8c2& ***!
@@ -38886,80 +38805,184 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel-body" }, [
+  return _c("div", { staticClass: "panel-body direction" }, [
     _c("div", { staticClass: "row" }, [
       _vm._m(0),
       _vm._v(" "),
       _c("div", { staticClass: "col-lg-6" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", [_vm._v("دسته بندی")]),
+          _c("label", [_vm._v(" نوع لباس")]),
+          _vm._v(" "),
+          _c("div", { staticStyle: { height: "35px" } }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sex_selected,
+                    expression: "sex_selected"
+                  }
+                ],
+                staticClass: " form-control",
+                attrs: { name: "sex" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.sex_selected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.checkcat()
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [_vm._v("مردانه")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("زنانه")])
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "load_cloth_properties" } }),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _vm._m(3),
           _vm._v(" "),
           _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { name: "category" },
-              on: {
-                click: function($event) {
-                  return _vm.loaddatacloth()
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "" } }, [_vm._v("انتخاب کنید")]),
-              _vm._v(" "),
-              _vm._l(_vm.cats, function(cat) {
-                return _c("option", { domProps: { value: cat["id"] } }, [
-                  _vm._v(_vm._s(cat["name"]))
-                ])
-              })
-            ],
-            2
+            "div",
+            { staticClass: "form-group", staticStyle: { display: "flex" } },
+            _vm._l(_vm.colors, function(color) {
+              return _c(
+                "div",
+                {
+                  style:
+                    " margin:5px; width: 70px;height: 70px; background:#" +
+                    color.code,
+                  on: {
+                    click: function($event) {
+                      return _vm.checkClick()
+                    }
+                  }
+                },
+                [
+                  _c("input", {
+                    staticClass: "bg-white color-choose ",
+                    staticStyle: { opacity: "0" },
+                    attrs: { name: "color[]", type: "checkbox" },
+                    domProps: { value: color["id"] }
+                  })
+                ]
+              )
+            }),
+            0
           )
         ])
       ]),
       _vm._v(" "),
-      _c("div", { attrs: { id: "load_cloth_properties" } }),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
       _c("div", { staticClass: "col-lg-6" }, [
-        _vm._m(2),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group", staticStyle: { display: "flex" } },
-          _vm._l(_vm.colors, function(color) {
-            return _c(
-              "div",
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v(" فروشگاه")]),
+          _vm._v(" "),
+          _c("div", { staticStyle: { height: "35px" } }, [
+            _c(
+              "select",
               {
-                style:
-                  " margin:5px; width: 70px;height: 70px; background:#" +
-                  color.code,
-                on: {
-                  click: function($event) {
-                    return _vm.checkClick()
-                  }
-                }
+                staticClass: "shop_select form-control direction",
+                attrs: { name: "shop_id" }
               },
               [
-                _c("input", {
-                  staticClass: "bg-white color-choose ",
-                  staticStyle: { opacity: "0" },
-                  attrs: { name: "color[]", type: "checkbox" },
-                  domProps: { value: color["id"] }
+                _c("option"),
+                _vm._v(" "),
+                _vm._l(_vm.shops, function(shop) {
+                  return _c("option", { domProps: { value: shop.id } }, [
+                    _vm._v(_vm._s(shop.id) + " -" + _vm._s(shop.shop))
+                  ])
                 })
-              ]
+              ],
+              2
             )
-          }),
-          0
-        )
+          ])
+        ])
       ]),
       _vm._v(" "),
-      _vm._m(3)
+      _vm._m(4),
+      _vm._v(" "),
+      _vm._m(5),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("نوع تخفیف")]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { TYPE: "radio", value: "0", name: "discount_type" },
+            on: {
+              click: function($event) {
+                return _vm.showDiscount(0)
+              }
+            }
+          }),
+          _vm._v("\n                بر اساس درصد\n                "),
+          _c("input", {
+            attrs: { type: "radio", value: "1", name: "discount_type" },
+            on: {
+              click: function($event) {
+                return _vm.showDiscount(1)
+              }
+            }
+          }),
+          _vm._v("\n                بر اساس قیمت\n                "),
+          _c("div", [
+            _c("input", {
+              staticClass: "form-control hidden",
+              attrs: {
+                placeholder: "مقدار تخفیف خود را وارد کنید",
+                type: "text",
+                id: "discount_amount",
+                name: "discount"
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass: "hidden",
+                attrs: { name: "discount", id: "discount_precent" }
+              },
+              _vm._l(100, function(index) {
+                return _c("option", { attrs: { value: "index" } }, [
+                  _vm._v(_vm._s(index) + "%")
+                ])
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(6)
     ]),
     _vm._v(" "),
-    _vm._m(4)
+    _vm._m(7)
   ])
 }
 var staticRenderFns = [
@@ -38969,7 +38992,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-6" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v(" عنوان محصول ")]),
+        _c("label", [_vm._v(" متن محصول ")]),
         _vm._v(" "),
         _c("input", {
           staticClass: "form-control",
@@ -38984,13 +39007,45 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-lg-6" }, [
       _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("دسته بندی")]),
+        _vm._v(" "),
+        _c("div", { staticStyle: { height: "35px" } }, [
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { name: "category_id", disabled: "", id: "categorySelect" }
+            },
+            [_c("option")]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-6" }, [
+      _c("div", { staticClass: "form-group" }, [
         _c("label", [_vm._v("تصویر")]),
         _vm._v(" "),
-        _c("input", { attrs: { name: "pic[]", type: "file" } }),
+        _c(
+          "div",
+          { staticClass: "dropzone dz-clickable", attrs: { id: "photo" } },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "dz-default dz-message",
+                attrs: { "data-dz-message": "" }
+              },
+              [_c("span", [_vm._v("تصاویر لباس ها را اینجا قرار دهید")])]
+            )
+          ]
+        ),
         _vm._v(" "),
-        _c("input", { attrs: { name: "pic[]", type: "file" } }),
-        _vm._v(" "),
-        _c("input", { attrs: { name: "pic[]", type: "file" } })
+        _c("input", { attrs: { type: "hidden", name: "pic", id: "photo-id" } })
       ])
     ])
   },
@@ -39012,8 +39067,41 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("textarea", {
           staticClass: "form-control",
-          attrs: { rows: "6", name: "comment", placeholder: "Enter comment" }
+          attrs: { rows: "6", name: "comment", placeholder: "" }
         })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("قیمت محصول ")]),
+        _vm._v(" "),
+        _c("input", { staticClass: "form-control", attrs: { name: "title" } })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-6 direction" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("وضعیت کاربر")]),
+        _vm._v(" "),
+        _c("div", { staticClass: " direction " }, [
+          _c("input", { attrs: { type: "radio", name: "status", value: "0" } }),
+          _vm._v("\n                بلاک\n                "),
+          _c("input", { attrs: { type: "radio", name: "status", value: "1" } }),
+          _vm._v("\n                غیر فعال\n                "),
+          _c("input", {
+            attrs: { type: "radio", checked: "", name: "status", value: "2" }
+          }),
+          _vm._v("\n                فعال\n            ")
+        ])
       ])
     ])
   },
@@ -39024,14 +39112,14 @@ var staticRenderFns = [
     return _c("div", { staticClass: "form-group" }, [
       _c(
         "button",
-        { staticClass: "btn btn-success", attrs: { type: "reset" } },
-        [_vm._v("پاک کردن فرم")]
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("درج به مجموعه")]
       ),
       _vm._v(" "),
       _c(
         "button",
-        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("درج به مجموعه")]
+        { staticClass: "btn btn-default", attrs: { type: "reset" } },
+        [_vm._v("پاک کردن فرم")]
       )
     ])
   }
@@ -39527,101 +39615,331 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel panel-default" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-striped table-bordered table-hover",
-            attrs: { id: "dataTables-example" }
-          },
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.customers, function(user) {
-                return _c("tr", { class: "odd grade" + _vm.xc }, [
-                  _c("td", [_vm._v(_vm._s(user["name"]))]),
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel panel-default direction" }, [
+      _c(
+        "div",
+        {
+          staticClass: "panel-heading   ",
+          staticStyle: { display: "flow-root" }
+        },
+        [
+          _c("span", { staticClass: "pull-right" }, [_vm._v("کاربران مشخصات")]),
+          _vm._v(" "),
+          _c("span", { staticStyle: { float: "left" } }, [
+            _c("a", { attrs: { href: "customers/create" } }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success   ",
+                  attrs: { type: "button" }
+                },
+                [_c("i", { staticClass: "fa fa-plus" })]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _c("div", { staticClass: "table-responsive" }, [
+          _c(
+            "table",
+            {
+              staticClass: "table table-striped table-bordered table-hover",
+              attrs: { id: "dataTables-example" }
+            },
+            [
+              _c("thead", [
+                _c("tr", [
+                  _c("th", [_vm._v("کد کاربر")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user["email"]))]),
+                  _c("th", [_vm._v("نام")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(user["phone"]))]),
+                  _c("th", [_vm._v("ایمیل")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user["platform"]))]),
+                  _c("th", [_vm._v("تماس")]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
-                    user["avatar"] == ""
-                      ? _c("img", {
-                          staticClass: " img-circle",
-                          attrs: { width: "50", src: "/images/users/user.jpg" }
-                        })
-                      : _c("img", {
-                          staticClass: " img-circle",
-                          attrs: { width: "50", src: user["avatar"] }
-                        })
-                  ]),
+                  _c("th", [_vm._v("عکس پروفایل")]),
                   _vm._v(" "),
-                  _c("td", { staticClass: "text-center" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-circle",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            return _vm.delete_user(user["id"])
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-times" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      { attrs: { href: "customers/" + user["id"] + "/edit" } },
-                      [_vm._m(2, true)]
-                    ),
-                    _vm._v(" "),
-                    user["status"] == 2
-                      ? _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-success  btn-circle",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.verify_user(user["id"])
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-check" })]
-                        )
-                      : _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-default  btn-circle",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.verify_user(user["id"])
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "fa fa-check" })]
-                        )
-                  ])
+                  _c("th", [_vm._v("عملیات")])
                 ])
+              ]),
+              _vm._v(" "),
+              _c("tbody")
+            ]
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=template&id=d20469e0&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/admin-edit-cloth-component.vue?vue&type=template&id=d20469e0& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "panel-body" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v(" متن محصول ")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { required: "", name: "title" },
+            domProps: { value: _vm.cloth.title }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v(" نوع لباس")]),
+          _vm._v(" "),
+          _c("div", { staticStyle: { height: "35px" } }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.sex_selected,
+                    expression: "sex_selected"
+                  }
+                ],
+                staticClass: " form-control",
+                attrs: { name: "sex" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.sex_selected = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.checkcat()
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "0" } }, [_vm._v("مردانه")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("زنانه")])
+              ]
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("دسته بندی")]),
+          _vm._v(" "),
+          _c("div", { staticStyle: { height: "35px" } }, [
+            _c(
+              "select",
+              {
+                staticClass: "form-control",
+                attrs: { name: "category_id", id: "categorySelect" }
+              },
+              _vm._l(_vm.cats, function(cat) {
+                return _c(
+                  "option",
+                  {
+                    domProps: {
+                      value: cat["id"],
+                      selected: cat.id == _vm.cloth.category_id
+                    }
+                  },
+                  [_vm._v(_vm._s(cat["name"]) + "\n                        ")]
+                )
               }),
               0
             )
-          ]
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { id: "load_cloth_properties" } },
+        _vm._l(_vm.pcats, function(pcat) {
+          return pcat.category_id == _vm.cloth.category_id
+            ? _c("div", { staticClass: "col-lg-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v(_vm._s(pcat.name))]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      class: pcat.multiselect
+                        ? "select_multiple form-control"
+                        : "select_single form-control",
+                      attrs: { multiple: "", name: "pcats[]", tabindex: "-1" }
+                    },
+                    _vm._l(_vm.pcatsd, function(pcat_data) {
+                      return pcat_data.categoryproperties_id == pcat.id
+                        ? _c(
+                            "option",
+                            {
+                              domProps: {
+                                value: pcat_data.id,
+                                selected: _vm.isExist(pcat_data.id)
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(pcat_data.name) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        : _vm._e()
+                    }),
+                    0
+                  )
+                ])
+              ])
+            : _vm._e()
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._l(_vm.colors, function(color) {
+              return _c("div", { style: { background: "#" + color.code } }, [
+                _c("input", {
+                  attrs: { type: "checkbox", name: "color[]" },
+                  domProps: {
+                    value: color.id,
+                    checked: _vm.isExistColor(color.id)
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", [_vm._v(_vm._s(color.code))])
+              ])
+            })
+          ],
+          2
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v(" فروشگاه")]),
+          _vm._v(" "),
+          _c("div", { staticStyle: { height: "35px" } }, [
+            _c(
+              "select",
+              {
+                staticClass: "shop_select form-control direction",
+                attrs: { name: "shop_id" }
+              },
+              _vm._l(_vm.shops, function(shop) {
+                return _c(
+                  "option",
+                  {
+                    domProps: {
+                      selected: shop.id == _vm.cloth.shop_id,
+                      value: shop.id
+                    }
+                  },
+                  [_vm._v(_vm._s(shop.id) + " -" + _vm._s(shop.shop))]
+                )
+              }),
+              0
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("توضیحات محصول ")]),
+          _vm._v(" "),
+          _c(
+            "textarea",
+            {
+              staticClass: "form-control",
+              attrs: {
+                rows: "6",
+                name: "comment",
+                placeholder: "Enter comment"
+              }
+            },
+            [_vm._v(_vm._s(_vm.cloth.comment))]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6 direction" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("وضعیت لباس")]),
+          _vm._v(" "),
+          _c("div", { staticClass: " direction " }, [
+            _c("input", {
+              attrs: { type: "radio", name: "status", value: "0" },
+              domProps: { checked: _vm.cloth.status == 0 }
+            }),
+            _vm._v("\n                    بلاک\n                    "),
+            _c("input", {
+              attrs: { type: "radio", name: "status", value: "1" },
+              domProps: { checked: _vm.cloth.status == 1 }
+            }),
+            _vm._v("\n                    غیر فعال\n                    "),
+            _c("input", {
+              attrs: { type: "radio", name: "status", value: "2" },
+              domProps: { checked: _vm.cloth.status == 2 }
+            }),
+            _vm._v("\n                    فعال\n                ")
+          ])
+        ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(2)
   ])
 }
 var staticRenderFns = [
@@ -39629,44 +39947,28 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "panel-heading   ",
-        staticStyle: { display: "flow-root" }
-      },
-      [
-        _c("span", { staticClass: "float-left" }, [_vm._v("users profile")]),
+    return _c("div", { staticClass: "col-lg-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [_vm._v("تصویر")]),
         _vm._v(" "),
-        _c("span", { staticStyle: { float: "right" } }, [
-          _c("a", { attrs: { href: "customers/create" } }, [
+        _c(
+          "div",
+          { staticClass: "dropzone dz-clickable", attrs: { id: "photo" } },
+          [
             _c(
-              "button",
-              { staticClass: "btn btn-primary  ", attrs: { type: "button" } },
-              [_c("i", { staticClass: "fa fa-plus" })]
+              "div",
+              {
+                staticClass: "dz-default dz-message",
+                attrs: { "data-dz-message": "" }
+              },
+              [_c("span", [_vm._v("تصاویر لباس ها را اینجا قرار دهید")])]
             )
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Name")]),
+          ]
+        ),
         _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Phone")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Platform(s)")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("image")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("opration")])
+        _c("input", {
+          attrs: { type: "hidden", name: "pic", id: "photo-id", value: "" }
+        })
       ])
     ])
   },
@@ -39674,11 +39976,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary btn-circle", attrs: { type: "button" } },
-      [_c("i", { staticClass: "fa fa-list" })]
-    )
+    return _c("div", [
+      _c("label", { staticClass: "text-left" }, [_vm._v("رنگ")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group direction" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-success", attrs: { type: "submit" } },
+        [_vm._v("به روز رسانی")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-default", attrs: { type: "reset" } },
+        [_vm._v("پاک کردن فرم")]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -55292,8 +55610,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-customer-component', __webpack_require__(/*! ./components/admin-customer-component.vue */ "./resources/js/components/admin-customer-component.vue")["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-clothes-component', __webpack_require__(/*! ./components/admin-clothes-component.vue */ "./resources/js/components/admin-clothes-component.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-create-cloth-component', __webpack_require__(/*! ./components/admin-create-cloth-component.vue */ "./resources/js/components/admin-create-cloth-component.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-edit-cloth-component', __webpack_require__(/*! ./components/admin-edit-cloth-component.vue */ "./resources/js/components/admin-edit-cloth-component.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-settings-component', __webpack_require__(/*! ./components/admin-settings-component.vue */ "./resources/js/components/admin-settings-component.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-sets-component', __webpack_require__(/*! ./components/admin-sets-component.vue */ "./resources/js/components/admin-sets-component.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('admin-create-set-component', __webpack_require__(/*! ./components/admin-create-set-component.vue */ "./resources/js/components/admin-create-set-component.vue")["default"]);
@@ -55375,75 +55693,6 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/components/admin-clothes-component.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/admin-clothes-component.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _admin_clothes_component_vue_vue_type_template_id_90534d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true& */ "./resources/js/components/admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true&");
-/* harmony import */ var _admin_clothes_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-clothes-component.vue?vue&type=script&lang=js& */ "./resources/js/components/admin-clothes-component.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _admin_clothes_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _admin_clothes_component_vue_vue_type_template_id_90534d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _admin_clothes_component_vue_vue_type_template_id_90534d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "90534d82",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/admin-clothes-component.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/admin-clothes-component.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/admin-clothes-component.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_clothes_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./admin-clothes-component.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-clothes-component.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_clothes_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true& ***!
-  \********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_clothes_component_vue_vue_type_template_id_90534d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-clothes-component.vue?vue&type=template&id=90534d82&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_clothes_component_vue_vue_type_template_id_90534d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_clothes_component_vue_vue_type_template_id_90534d82_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 
@@ -55667,6 +55916,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_customer_component_vue_vue_type_template_id_36106b52___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_customer_component_vue_vue_type_template_id_36106b52___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/admin-edit-cloth-component.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/admin-edit-cloth-component.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _admin_edit_cloth_component_vue_vue_type_template_id_d20469e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./admin-edit-cloth-component.vue?vue&type=template&id=d20469e0& */ "./resources/js/components/admin-edit-cloth-component.vue?vue&type=template&id=d20469e0&");
+/* harmony import */ var _admin_edit_cloth_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./admin-edit-cloth-component.vue?vue&type=script&lang=js& */ "./resources/js/components/admin-edit-cloth-component.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _admin_edit_cloth_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _admin_edit_cloth_component_vue_vue_type_template_id_d20469e0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _admin_edit_cloth_component_vue_vue_type_template_id_d20469e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/admin-edit-cloth-component.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/admin-edit-cloth-component.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/admin-edit-cloth-component.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./admin-edit-cloth-component.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/admin-edit-cloth-component.vue?vue&type=template&id=d20469e0&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/admin-edit-cloth-component.vue?vue&type=template&id=d20469e0& ***!
+  \***********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_template_id_d20469e0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./admin-edit-cloth-component.vue?vue&type=template&id=d20469e0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/admin-edit-cloth-component.vue?vue&type=template&id=d20469e0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_template_id_d20469e0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_admin_edit_cloth_component_vue_vue_type_template_id_d20469e0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -31,5 +31,8 @@ class Cloth extends Model
     {
         return $this->belongsToMany(Set::class);
     }
-
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class);
+    }
 }

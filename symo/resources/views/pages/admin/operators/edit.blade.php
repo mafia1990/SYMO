@@ -114,7 +114,7 @@
                                     <label for="file" class="col-md-4 col-form-label text-md-right">{{ __('عکس پروفایل') }}</label>
 
                                     <div class="col-md-8">
-                                    {!! Form::file("file",[
+                                    {!! Form::file("avatar",[
                                     "class"=>" form-control",
 
                                     ]) !!}

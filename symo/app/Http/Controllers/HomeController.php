@@ -39,11 +39,11 @@ class HomeController extends Controller
         $user=Auth::user();
         $fields['name']=$user->name;
         if($user->type==1){
-            $fields['setsCount']= Set::where('status',1)->count();
+            $fields['setsCount']= Set::where('status',0)->count();
             $fields['sets']= Set::all();
-            $fields['sellersCount'] =User::where('type',5)->where('status',1)->count();
+            $fields['sellersCount'] =User::where('type',5)->where('status',0)->count();
             $fields['sellers'] =User::where('type',5)->count();
-            $fields['clothUnverifyCount']=  Cloth::where('status','1')->count();
+            $fields['clothUnverifyCount']=  Cloth::where('status','0')->count();
             $fields['cloths']=  Cloth::with('images')->get();
             $fields['likeCount']=  Like::all()->count();
             $fields['userUnverifyCustomerCount'] =User::where('type',4)->where('status',1)->count();

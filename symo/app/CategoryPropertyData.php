@@ -11,5 +11,8 @@ class CategoryPropertyData extends Model
     {
         return $this->belongsToMany(Cloth::class,'cloth_category_property_data');
     }
-
+    public function categoryproperties()
+    {
+        return $this->belongsTo(CategoryProperty::class);
+    }
 }

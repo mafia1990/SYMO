@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,27 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    public function login(Request $request)
+    {
+        // Check validation
+        $this->validate($request, [
+            'mobile' => 'required|regex:/[0-9]{10}/|digits:10',
+        ]);
 
+        // Get user record
+        $user = User::where('mobile', $request->get('mobile'))->first();
+
+        // Check Condition Mobile No. Found or Not
+        if($request->get('mobile') != $user->mobile) {
+            \Session::put('errors', 'اطلاعات شما اشتباست!!');
+            return back();
+        }
+
+        // Set Auth Details
+        \Auth::login($user);
+
+        // Redirect home page
+        return redirect()->route('home');
+    }
 
 }

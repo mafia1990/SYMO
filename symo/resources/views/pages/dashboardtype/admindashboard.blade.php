@@ -1,6 +1,7 @@
 @section('CSS')
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
+
 <div class="row">
     <!-- Welcome -->
     <div class="col-lg-12">
@@ -510,7 +511,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">
-                <a href="javascript:void(0)" class="uppercase">نمایش تمام محصولات</a>
+                <a href="{{route("clothes.index")}}" class="uppercase">نمایش تمام محصولات</a>
             </div>
             <!-- /.box-footer -->
         </div>

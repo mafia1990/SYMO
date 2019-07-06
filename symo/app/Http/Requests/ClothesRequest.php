@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class ClothesRequest extends FormRequest
@@ -25,26 +26,33 @@ class ClothesRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 {
-                     $rules= [
+                    $rules = [
                         'title' => 'required|max:50|min:3',
-                        'category' => 'required|exists:categories,id',
+                        'category_id' => 'required|exists:categories,id',
+                        'shop_id' => 'required|exists:shops,id',
                         'pcats' => 'required|exists:category_property_data,id',
+                        'sex' => 'required|in:0,1,2',
                         'color' => 'required|exists:colors,id',
-
-                        'comment' => 'max:200'
+                        'status' => 'required|in:0,1,2',
+                        'comment' => 'max:200',
+                        'pic' => 'required'
                     ];
 
-                    $nbr = count($this->file('pic')) - 1;
-                    foreach(range(0, $nbr) as $index) {
-                       if($index==0) $rules['pic.' . $index] = 'required|max:1000|mimes:png,jpg,jpeg';
-                        else $rules['pic.' . $index] = 'max:1000|mimes:png,jpg,jpeg';
-                    }
                     return $rules;
                 }
             case 'PUT':
             case 'PATCH':
                 {
-                  return [];
+                    return [
+                        'title' => 'required|max:50|min:3',
+                        'category_id' => 'required|exists:categories,id',
+                        'shop_id' => 'required|exists:shops,id',
+                        'pcats' => 'required|exists:category_property_data,id',
+                        'sex' => 'required|in:0,1,2',
+                        'status' => 'required|in:0,1,2',
+                        'color' => 'required|exists:colors,id',
+                        'comment' => 'max:200',
+                        'pic' => 'required'];
                 }
         }
         return [];
