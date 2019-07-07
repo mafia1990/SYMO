@@ -95,7 +95,7 @@
 
                 <div class="form-group">
                     <label>قیمت محصول </label>
-                    <input class="form-control"  name="title">
+                    <input class="form-control" type='text' name="amount">
 
                 </div>
             </div>
@@ -103,31 +103,27 @@
 
                 <div class="form-group">
                     <label>نوع تخفیف</label>
-                    <input class=""  @click="showDiscount(0)" TYPE="radio" value="0" name="discount_type">
+                    <input class="" @click="showDiscount(0)" TYPE="radio" value="0" name="discount_type">
                     بر اساس درصد
-                    <input class="" @click="showDiscount(1)" type="radio" value="1" name="discount_type" >
+                    <input class="" @click="showDiscount(1)" type="radio" value="1" name="discount_type">
                     بر اساس قیمت
-                    <div>
-                    <input placeholder="مقدار تخفیف خود را وارد کنید" class="form-control hidden" type="text" id="discount_amount" name="discount">
-                    <select    name="discount" id="discount_precent" class="hidden">
-                        <option v-for="index in 100" value="index">{{index}}%</option>
-                    </select>
-                    </div>
+                    <div id="discount">
+                       </div>
                 </div>
             </div>
             <div class="col-lg-6 direction">
                 <div class="form-group">
 
-                <label>وضعیت کاربر</label>
+                    <label>وضعیت کاربر</label>
 
-                <div class=" direction "  >
-                    <input type="radio" name="status" value="0">
-                    بلاک
-                    <input type="radio" name="status" value="1">
-                    غیر فعال
-                    <input type="radio" checked name="status" value="2">
-                    فعال
-                </div>
+                    <div class=" direction ">
+                        <input type="radio" name="status" value="0">
+                        بلاک
+                        <input type="radio" name="status" value="1">
+                        غیر فعال
+                        <input type="radio" checked name="status" value="2">
+                        فعال
+                    </div>
 
                 </div>
             </div>
@@ -155,17 +151,23 @@
 
         },
         methods: {
-            showDiscount: function(type){
-                if(type) {
-                    document.getElementById('discount_precent').classList.add("hidden");
-                    document.getElementById('discount_amount').classList.remove("hidden");
+            showDiscount: function (type) {
+                if (type) {
+                    document.getElementById('discount').innerHTML = " <input placeholder=\"مقدار تخفیف خود را وارد کنید\"   class=\"form-control\" value=\"\"  type=\"text\"  id=\"discount_amount\" name=\"discount\">";
                     return;
                 }
-                document.getElementById('discount_precent').classList.remove("hidden");
-                document.getElementById('discount_amount').classList.add("hidden");
+                var options = "";
+                for (var i = 1; i <= 100; i++) {
+                    options += " <option value=" + i + "  >" + i + "%</option>";
+
+
+                }
+                document.getElementById('discount').innerHTML = "<select    name=\"discount\" id=\"discount_precent\" >\n" + options +
+                    "  </select>";
 
 
             },
+
             checkcat: function () {
                 var sex = this.sex_selected;
                 var options = "<option></option>";
@@ -187,7 +189,6 @@
                 }
             },
         }
-
     }
 
 </script>

@@ -15,7 +15,7 @@ class AddPriceToClothsTable extends Migration
     {
         Schema::table('cloths', function (Blueprint $table) {
             $table->float('price')->unsigned()->nullable();
-            $table->boolean('discountype')->nullable();
+            $table->boolean('discount_type')->nullable();
             $table->unsignedInteger('discount')->nullable();
         });
     }

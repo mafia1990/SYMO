@@ -35,7 +35,9 @@ class ClothesRequest extends FormRequest
                         'color' => 'required|exists:colors,id',
                         'status' => 'required|in:0,1,2',
                         'comment' => 'max:200',
-                        'pic' => 'required'
+                        'pic' => 'required',
+                        'discount_type' => 'in:0,1',
+                        'discount' => 'integer',
                     ];
 
                     return $rules;
@@ -52,6 +54,8 @@ class ClothesRequest extends FormRequest
                         'status' => 'required|in:0,1,2',
                         'color' => 'required|exists:colors,id',
                         'comment' => 'max:200',
+                        'discount_type' => 'in:0,1',
+                        'discount' => 'integer',
                         'pic' => 'required'];
                 }
         }

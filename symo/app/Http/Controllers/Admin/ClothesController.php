@@ -59,11 +59,12 @@ class ClothesController extends Controller
         $cloth->title=$request['title'];
         $cloth->status=$request['status'];
         $cloth->sex=$request['sex'];
-        $cloth->amount=$request['amount'];
-        $cloth->discounttype=$request['discount_type'];
-        $cloth->discount=$request['category_id'];
+        $cloth->price=$request['amount'];
+        $cloth->discount_type=$request['discount_type'];
+        $cloth->discount=$request['discount'];
         $cloth->comment=$request['comment'];
         $cloth->shop_id=$request['shop_id'];
+        $cloth->category_id=$request['category_id'];
         $cloth->save();
         $pics=preg_split("/[\s,]+/", $request['pic']);
         foreach ($pics as $pic){
@@ -139,6 +140,9 @@ class ClothesController extends Controller
         $cloth->status=$request['status'];
         $cloth->category_id=$request['category_id'];
         $cloth->comment=$request['comment'];
+        $cloth->price=$request['amount'];
+        $cloth->discount_type=$request['discount_type'];
+        $cloth->discount=$request['discount'];
         $cloth->save();
         $pics=preg_split("/[\s,]+/", trim($request['pic']));
         $images=Image::where('cloth_id',$cloth->id)->get()->pluck('id')->toArray();

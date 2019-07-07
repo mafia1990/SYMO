@@ -1834,10 +1834,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "admin-create-cloth-component",
   props: ['data'],
@@ -1852,13 +1848,17 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showDiscount: function showDiscount(type) {
       if (type) {
-        document.getElementById('discount_precent').classList.add("hidden");
-        document.getElementById('discount_amount').classList.remove("hidden");
+        document.getElementById('discount').innerHTML = " <input placeholder=\"مقدار تخفیف خود را وارد کنید\"   class=\"form-control\" value=\"\"  type=\"text\"  id=\"discount_amount\" name=\"discount\">";
         return;
       }
 
-      document.getElementById('discount_precent').classList.remove("hidden");
-      document.getElementById('discount_amount').classList.add("hidden");
+      var options = "";
+
+      for (var i = 1; i <= 100; i++) {
+        options += " <option value=" + i + "  >" + i + "%</option>";
+      }
+
+      document.getElementById('discount').innerHTML = "<select    name=\"discount\" id=\"discount_precent\" >\n" + options + "  </select>";
     },
     checkcat: function checkcat() {
       var sex = this.sex_selected;
@@ -2299,6 +2299,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "admin-create-cloth-component",
   props: ['data'],
@@ -2329,6 +2353,20 @@ __webpack_require__.r(__webpack_exports__);
     },
     isChecked: function isChecked(id) {
       if (id == this.cloth) self.isChecked = true;
+    },
+    showDiscount: function showDiscount(type) {
+      if (type) {
+        document.getElementById('discount').innerHTML = " <input placeholder=\"مقدار تخفیف خود را وارد کنید\"  v-if=\"cloth.discount_type==1\" class=\"form-control\" :value=\"" + this.cloth.discount + "\"  type=\"text\"  id=\"discount_amount\" name=\"discount\">";
+        return;
+      }
+
+      var options = "";
+
+      for (var i = 1; i <= 100; i++) {
+        if (i == this.cloth.discount) options += " <option value=" + i + " selected >" + i + "%</option>";else options += " <option value=\"" + i + "\" >" + i + "%</option>";
+      }
+
+      document.getElementById('discount').innerHTML = "<select    name=\"discount\" id=\"discount_precent\" >\n" + options + "                        </select>";
     },
     isExist: function isExist(pcatd_id) {
       var res = this.pclothd.some(function (pcloth_data) {
@@ -38951,31 +38989,7 @@ var render = function() {
             }
           }),
           _vm._v("\n                بر اساس قیمت\n                "),
-          _c("div", [
-            _c("input", {
-              staticClass: "form-control hidden",
-              attrs: {
-                placeholder: "مقدار تخفیف خود را وارد کنید",
-                type: "text",
-                id: "discount_amount",
-                name: "discount"
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "hidden",
-                attrs: { name: "discount", id: "discount_precent" }
-              },
-              _vm._l(100, function(index) {
-                return _c("option", { attrs: { value: "index" } }, [
-                  _vm._v(_vm._s(index) + "%")
-                ])
-              }),
-              0
-            )
-          ])
+          _c("div", { attrs: { id: "discount" } })
         ])
       ]),
       _vm._v(" "),
@@ -39080,7 +39094,10 @@ var staticRenderFns = [
       _c("div", { staticClass: "form-group" }, [
         _c("label", [_vm._v("قیمت محصول ")]),
         _vm._v(" "),
-        _c("input", { staticClass: "form-control", attrs: { name: "title" } })
+        _c("input", {
+          staticClass: "form-control",
+          attrs: { type: "text", name: "amount" }
+        })
       ])
     ])
   },
@@ -39094,13 +39111,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: " direction " }, [
           _c("input", { attrs: { type: "radio", name: "status", value: "0" } }),
-          _vm._v("\n                بلاک\n                "),
+          _vm._v("\n                    بلاک\n                    "),
           _c("input", { attrs: { type: "radio", name: "status", value: "1" } }),
-          _vm._v("\n                غیر فعال\n                "),
+          _vm._v("\n                    غیر فعال\n                    "),
           _c("input", {
             attrs: { type: "radio", checked: "", name: "status", value: "2" }
           }),
-          _vm._v("\n                فعال\n            ")
+          _vm._v("\n                    فعال\n                ")
         ])
       ])
     ])
@@ -39911,6 +39928,79 @@ var render = function() {
             },
             [_vm._v(_vm._s(_vm.cloth.comment))]
           )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("قیمت محصول ")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", name: "amount" },
+            domProps: { value: _vm.cloth.price }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-lg-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("نوع تخفیف")]),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { TYPE: "radio", value: "0", name: "discount_type" },
+            domProps: { checked: _vm.cloth.discount_type == 0 },
+            on: {
+              click: function($event) {
+                return _vm.showDiscount(0)
+              }
+            }
+          }),
+          _vm._v("\n                بر اساس درصد\n                "),
+          _c("input", {
+            attrs: { type: "radio", value: "1", name: "discount_type" },
+            domProps: { checked: _vm.cloth.discount_type == 1 },
+            on: {
+              click: function($event) {
+                return _vm.showDiscount(1)
+              }
+            }
+          }),
+          _vm._v("\n                بر اساس قیمت\n                "),
+          _c("div", { attrs: { id: "discount" } }, [
+            _vm.cloth.discount_type == 1
+              ? _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    placeholder: "مقدار تخفیف خود را وارد کنید",
+                    type: "text",
+                    id: "discount_amount",
+                    name: "discount"
+                  },
+                  domProps: { value: _vm.cloth.discount }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.cloth.discount_type == 0
+              ? _c(
+                  "select",
+                  { attrs: { name: "discount", id: "discount_precent" } },
+                  _vm._l(100, function(index) {
+                    return _c(
+                      "option",
+                      {
+                        domProps: {
+                          value: index,
+                          selected: index == _vm.cloth.discount
+                        }
+                      },
+                      [_vm._v(_vm._s(index) + "%")]
+                    )
+                  }),
+                  0
+                )
+              : _vm._e()
+          ])
         ])
       ]),
       _vm._v(" "),

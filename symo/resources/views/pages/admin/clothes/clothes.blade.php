@@ -61,7 +61,7 @@
 {{--    <script src="{{asset('js/app.js')}}"></script>--}}
     <script src="/plugins/dataTables/jquery.dataTables.js"></script>
     <script src="/plugins/dataTables/dataTables.bootstrap.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/axios/0.19.0/axios.min.js"></script>
 
     <script>
         $(document).ready(function () {
@@ -93,7 +93,7 @@
                     {data: 'category.name'},
                     {
                         data: null, render: function (data, type, row) {
-                            if (data.images[0].path)
+                            if (data.images.length>0 && data.images[0].path)
                                 return '<img class=" img-circle" width="50" height="50"  src=' + data.images[0].path + '>';
                             else return '<img  width="50" height="50" class=" img-circle" src="/images/users/user.jpg"/>';
 

@@ -103,6 +103,30 @@
 
                 </div>
             </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    <label>قیمت محصول </label>
+                    <input class="form-control"  :value="cloth.price" type='text' name="amount">
+
+                </div>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    <label>نوع تخفیف</label>
+                    <input class=""  @click="showDiscount(0)" :checked="cloth.discount_type==0" TYPE="radio" value="0" name="discount_type">
+                    بر اساس درصد
+                    <input class="" @click="showDiscount(1)" :checked="cloth.discount_type==1" type="radio" value="1" name="discount_type" >
+                    بر اساس قیمت
+                    <div id="discount">
+                        <input placeholder="مقدار تخفیف خود را وارد کنید"  v-if="cloth.discount_type==1" class="form-control" :value="cloth.discount"  type="text"  id="discount_amount" name="discount">
+                        <select    name="discount" id="discount_precent"  v-if="cloth.discount_type==0">
+                            <option v-for="index in 100" :value="index" :selected="index==cloth.discount">{{index}}%</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
             <div class="col-lg-6 direction">
                 <div class="form-group">
@@ -162,6 +186,24 @@
              if(id==this.cloth)
                  self.isChecked=true;
            },
+            showDiscount: function(type){
+                if(type) {
+                    document.getElementById('discount').innerHTML=" <input placeholder=\"مقدار تخفیف خود را وارد کنید\"  v-if=\"cloth.discount_type==1\" class=\"form-control\" :value=\""+this.cloth.discount+"\"  type=\"text\"  id=\"discount_amount\" name=\"discount\">";
+                    return;
+                }
+                var options="";
+                for(var i=1;i<=100;i++){
+                    if(i==this.cloth.discount)
+                    options+=" <option value="+i+" selected >"+i+"%</option>";
+                    else    options+=" <option value=\""+i+"\" >"+i+"%</option>";
+
+
+                }
+                document.getElementById('discount').innerHTML= "<select    name=\"discount\" id=\"discount_precent\" >\n" +options+
+                    "                        </select>" ;
+
+
+            },
             isExist: function (pcatd_id) {
 
 
